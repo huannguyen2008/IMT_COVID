@@ -10,8 +10,9 @@
     <color name="extraLightGray">#E1E8ED</color>
     <color name="extraExtraLightGray">#F5F8FA</color>
     <color name="red">#ffe81c4f</color>
-    <color name="green">#00ff00</color>
-    <color name="rose">#c51f5d</color>
+    <color name="lightRed">#F3B4C3</color>
+    <color name="green">#B5F1B5</color>
+    <color name="yellow">#F3ECB3</color>
 
 
 </resources>

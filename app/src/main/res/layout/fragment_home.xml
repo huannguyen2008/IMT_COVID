@@ -1,20 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HomeFragment">
 
-     <TextView
-         android:padding="@dimen/padding_left"
-         android:textStyle="bold"
-         android:text="@string/covid_19_dashboard"
-         android:textSize="@dimen/caption"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_left"
+        android:text="@string/covid_19_dashboard"
+        android:textSize="@dimen/caption"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/summary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_left"
+        android:text="@string/summary_worldwide"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/total_cases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_left"
+        app:layout_constraintEnd_toStartOf="@id/death_cases"
+        app:layout_constraintStart_toStartOf="@id/summary_title"
+        app:layout_constraintTop_toBottomOf="@id/summary_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightRed"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/total_cases_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_cases"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_cases_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/Default_number"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+
+            <TextView
+                android:background="@color/red"
+                android:id="@+id/new_cases_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/default_plus"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/death_cases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/total_cases"
+        app:layout_constraintTop_toBottomOf="@id/summary_title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightGray"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/death_cases_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/death_cases"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/death_cases_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/Default_number"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+
+            <TextView
+                android:background="@color/darkGray"
+                android:id="@+id/new_death_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/default_plus"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/active_cases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/total_cases"
+        app:layout_constraintEnd_toStartOf="@id/recovered_cases">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/yellow"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/active_cases_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/active_cases"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/active_cases_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/Default_number"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/recovered_cases"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_left"
+        app:layout_constraintStart_toEndOf="@id/active_cases"
+        app:layout_constraintTop_toBottomOf="@id/death_cases"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/recovered_cases_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/recovered_cases"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/recovered_cases_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/Default_number"
+                android:textAlignment="center"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="normal" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

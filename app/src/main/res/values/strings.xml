@@ -6,4 +6,14 @@
     <string name="health">Health</string>
     <string name="menu">Menu</string>
     <string name="covid_19_dashboard">COVID-19 Dashboard</string>
+    <string name="references">References</string>
+    <string name="about">About us</string>
+    <string name="lang">Change language</string>
+    <string name="summary_worldwide">Summary Worldwide</string>
+    <string name="total_cases">Total cases</string>
+    <string name="death_cases">Death cases</string>
+    <string name="Default_number">0</string>
+    <string name="default_plus">+0</string>
+    <string name="active_cases">Active cases</string>
+    <string name="recovered_cases">Recovered cases</string>
 </resources>

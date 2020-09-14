@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/ic_references"
+        android:enabled="true"
+        android:title="@string/references" />
+    <item
+        android:id="@+id/ic_about"
+        android:enabled="true"
+        android:title="@string/about" />
+    <item
+        android:id="@+id/ic_lang"
+        android:enabled="true"
+        android:title="@string/lang" />
+</menu>
