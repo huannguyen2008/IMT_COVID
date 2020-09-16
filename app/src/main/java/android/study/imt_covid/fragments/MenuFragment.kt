@@ -1,4 +1,4 @@
-package android.study.imt_covid.Fragments
+package android.study.imt_covid.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

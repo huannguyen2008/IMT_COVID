@@ -16,4 +16,6 @@
     <string name="default_plus">+0</string>
     <string name="active_cases">Active cases</string>
     <string name="recovered_cases">Recovered cases</string>
+    <string name="cases_city_title">Cases by City/Provinces</string>
+    <string name="city_provinces">City/Provinces</string>
 </resources>
