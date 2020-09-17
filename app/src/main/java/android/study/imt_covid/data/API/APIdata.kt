@@ -13,6 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 const val API_KEY = "daily_data"
 
@@ -41,6 +42,7 @@ interface APIdata {
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .connectTimeout(30, TimeUnit.SECONDS)
                 .build()
             val gson = GsonBuilder()
                 .registerTypeAdapter(CaseInfo::class.java, CaseInfoTypeConverter())
