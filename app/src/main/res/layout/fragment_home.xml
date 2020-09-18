@@ -32,31 +32,33 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <Button
+        android:backgroundTint="@color/colorPrimary"
         android:id="@+id/test_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:layout_constraintStart_toEndOf="@id/summary_title"
-        app:layout_constraintTop_toTopOf="@id/summary_title" />
+        app:layout_constraintTop_toTopOf="@id/summary_title"
+        app:layout_constraintBottom_toBottomOf="@id/summary_title"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/total_cases"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_margin="@dimen/padding_left"
-        app:layout_constraintEnd_toStartOf="@id/death_cases"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/summary_title"
         app:layout_constraintTop_toBottomOf="@id/summary_title">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/lightRed"
+            android:layout_height="match_parent"
+            android:background="@color/lightGray"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/total_cases_title"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:text="@string/total_cases"
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -64,24 +66,25 @@
                 android:textStyle="bold" />
 
             <TextView
+
                 android:id="@+id/total_cases_number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:text="@string/Default_number"
                 android:textAlignment="center"
-                android:textSize="@dimen/normal_text"
+                android:textSize="@dimen/caption"
                 android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/new_cases_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/red"
-                android:text="@string/default_plus"
-                android:textAlignment="center"
-                android:textSize="@dimen/normal_text"
-                android:textStyle="normal" />
+<!--            <TextView-->
+<!--                android:id="@+id/new_cases_number"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/red"-->
+<!--                android:text="@string/default_plus"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textSize="@dimen/normal_text"-->
+<!--                android:textStyle="normal" />-->
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -92,13 +95,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_left"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/total_cases"
-        app:layout_constraintTop_toBottomOf="@id/summary_title">
+        app:layout_constraintStart_toEndOf="@id/recovered_cases"
+        app:layout_constraintTop_toBottomOf="@id/total_cases">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/lightGray"
+            android:background="@color/lightRed"
             android:orientation="vertical">
 
             <TextView
@@ -121,15 +124,6 @@
                 android:textSize="@dimen/normal_text"
                 android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/new_death_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/darkGray"
-                android:text="@string/default_plus"
-                android:textAlignment="center"
-                android:textSize="@dimen/normal_text"
-                android:textStyle="normal" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
@@ -175,10 +169,10 @@
         android:id="@+id/recovered_cases"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_left"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/padding_left"
+        app:layout_constraintEnd_toStartOf="@id/death_cases"
         app:layout_constraintStart_toEndOf="@id/active_cases"
-        app:layout_constraintTop_toBottomOf="@id/death_cases">
+        app:layout_constraintTop_toBottomOf="@id/total_cases">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -222,36 +216,47 @@
         app:layout_constraintTop_toBottomOf="@id/active_cases" />
 
     <TableLayout
+
         android:id="@+id/table_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding_left"
+        android:layout_marginStart="@dimen/padding_left"
+        android:layout_marginEnd="@dimen/padding_left"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/cases_city_title">
 
         <TableRow
-            android:background="@color/colorPrimaryVariant"
+            android:background="@drawable/table_border"
             android:padding="@dimen/padding_left">
 
             <TextView
+                android:textColor="@color/black"
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/city_provinces" />
 
             <TextView
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/total_cases" />
+                android:textColor="@color/yellow"
+                android:text="Total" />
 
             <TextView
+                android:textColor="@color/green"
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/recovered_cases" />
 
             <TextView
+                android:textColor="@color/red"
+                android:textAlignment="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -262,6 +267,7 @@
 
 
     <TextView
+        android:text="xam loz`"
         android:id="@+id/test_text"
         android:layout_width="match_parent"
         android:layout_height="200dp"

@@ -12,7 +12,7 @@ import androidx.room.Query
 @Dao
 interface CasesInfoDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsert(caseInfo: CaseInfo)
+    fun upsert(caseInfo: List<CaseInfo>)
     @Query(value = "select * from case_info where id= $CASE_INFO_ID")
     fun getCasesInfo(): LiveData<UnitSpecificCasesInfo>
 }

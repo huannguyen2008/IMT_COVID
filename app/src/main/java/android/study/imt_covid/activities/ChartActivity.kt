@@ -1,12 +1,8 @@
-package android.study.imt_covid
+package android.study.imt_covid.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.gson.Gson
-import java.net.URL
-
-import kotlinx.android.synthetic.main.activity_chart.*
-
+import android.study.imt_covid.R
 
 
 class ChartActivity : AppCompatActivity() {

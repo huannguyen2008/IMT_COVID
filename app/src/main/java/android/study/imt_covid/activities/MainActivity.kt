@@ -1,7 +1,8 @@
-package android.study.imt_covid
+package android.study.imt_covid.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.study.imt_covid.R
 import android.study.imt_covid.fragments.HealthFragment
 import android.study.imt_covid.fragments.HomeFragment
 import android.study.imt_covid.fragments.MenuFragment

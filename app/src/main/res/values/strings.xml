@@ -11,11 +11,11 @@
     <string name="lang">Change language</string>
     <string name="summary_worldwide">Summary Worldwide</string>
     <string name="total_cases">Total cases</string>
-    <string name="death_cases">Death cases</string>
+    <string name="death_cases">Death</string>
     <string name="Default_number">0</string>
     <string name="default_plus">+0</string>
-    <string name="active_cases">Active cases</string>
-    <string name="recovered_cases">Recovered cases</string>
+    <string name="active_cases">Active</string>
+    <string name="recovered_cases">Recovered</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
     <string name="city_provinces">City/Provinces</string>
 </resources>

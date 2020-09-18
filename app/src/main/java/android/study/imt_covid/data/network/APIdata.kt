@@ -1,8 +1,9 @@
-package android.study.imt_covid.data.API
+package android.study.imt_covid.data.network
 
 import android.study.imt_covid.data.dataClass.CaseInfo
 import android.study.imt_covid.data.dataClass.CaseInfoTypeConverter
-import android.study.imt_covid.data.response.TotalAndActiveResponse
+import android.study.imt_covid.data.network.response.ConnectivityInterceptor
+import android.study.imt_covid.data.dataClass.TotalAndActiveResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -25,7 +26,9 @@ interface APIdata {
             : Deferred<TotalAndActiveResponse>
 
     companion object {
-        operator fun invoke(): APIdata {
+        operator fun invoke(
+            connectivityInterceptor: ConnectivityInterceptor
+        ): APIdata {
             val requestInterceptor = Interceptor { chain ->
 
                 val url = chain.request()
@@ -42,7 +45,8 @@ interface APIdata {
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
-                .connectTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .addInterceptor(connectivityInterceptor)
                 .build()
             val gson = GsonBuilder()
                 .registerTypeAdapter(CaseInfo::class.java, CaseInfoTypeConverter())
