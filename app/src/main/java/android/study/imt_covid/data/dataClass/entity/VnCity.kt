@@ -1,24 +1,24 @@
-package android.study.imt_covid.data.dataClass
+package android.study.imt_covid.data.dataClass.entity
 
-import android.study.imt_covid.data.unitlocalized.UnitSpecifyVnCityInfo
+import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 
-const val VN_CITY_ID = 0
+
 @Entity(tableName = "vn_city")
 data class VnCity(
+    @PrimaryKey(autoGenerate = false)
     override val city: String,
     override val totalCity: Int,
     override val activeCity: Int,
     override val recoveredCity: Int,
     override val deathCity: Int,
     override val diffCity: Int
-): UnitSpecifyVnCityInfo{
-    @PrimaryKey(autoGenerate = false)
-    var id: Int = VN_CITY_ID
+) : UnitSpecifyVnCityInfo{
+
 }
 
 // convert json file List<List<Any>>

@@ -1,6 +1,10 @@
 package android.study.imt_covid.data.network
 
 import android.study.imt_covid.data.dataClass.*
+import android.study.imt_covid.data.dataClass.entity.VnCity
+import android.study.imt_covid.data.dataClass.entity.VnCityTypeConverter
+import android.study.imt_covid.data.dataClass.entity.VnSummary
+import android.study.imt_covid.data.dataClass.entity.VnSummaryTypeConverter
 import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptor
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -17,13 +21,14 @@ import java.util.concurrent.TimeUnit
 // https://imt-covid19.herokuapp.com/vietnam/api?key=summary
 // https://imt-covid19.herokuapp.com/vietnam/api?key=city_summary
 interface APIdata {
+    @GET(value = "api")
+    fun getVnSummaryData(@Query(value = "key") key: String = "summary")
+            : Deferred<VnSummaryResponse>
 
     @GET(value = "api")
-    fun getVnSummaryData(@Query(value = "summary") VnSummary: VnSummary)
-            : Deferred<VnSummaryResponse>
-    @GET(value = "api")
-    fun getVnCityData(@Query(value = "city_summary") VnCity: List<VnCity>)
-            :Deferred<VnCityResponse>
+    fun getVnCityData(@Query(value = "key") key: String = "city_summary")
+            : Deferred<VnCityResponse>
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor
@@ -33,8 +38,6 @@ interface APIdata {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("key", "summary")
-                    .addQueryParameter("key", "city_summary")
                     .build()
                 val request = chain.request()
                     .newBuilder()
@@ -52,9 +55,8 @@ interface APIdata {
                 .build()
             val gson = GsonBuilder()
                 .registerTypeAdapter(VnSummary::class.java, VnSummaryTypeConverter())
-                .registerTypeAdapter(VnCity::class.java,VnCityTypeConverter())
+                .registerTypeAdapter(VnCity::class.java, VnCityTypeConverter())
                 .create()
-
             return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl("https://imt-covid19.herokuapp.com/vietnam/")

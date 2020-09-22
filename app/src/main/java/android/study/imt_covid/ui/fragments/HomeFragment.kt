@@ -7,10 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
 import android.study.imt_covid.activities.ChartActivity
-import android.study.imt_covid.data.dataClass.VnSummary
+import android.study.imt_covid.data.dataClass.entity.VnSummary
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.viewmodel.HomeViewModel
-import android.study.imt_covid.viewmodel.HomeViewModelFactory
+import android.study.imt_covid.ui.viewmodel.HomeViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -46,23 +46,19 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun bindUI() = launch {
-        val homeFragment = viewModel.VnSummaryRepository.getVnSummary(
-            VnSummary(
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0
-            )
-        )
-        homeFragment.observe(viewLifecycleOwner, Observer {
+        val vnSum = viewModel.vnSummary.await()
+
+        vnSum.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
             updateTotal(it.total)
             updateActive(it.active)
             updateRecovered(it.recover)
             updateDeath(it.totalDeath)
+        })
+        val vnCity = viewModel.vnCity.await()
+        vnCity.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            test_text.text = it.toString()
         })
     }
     private fun updateTotal(total: Int){

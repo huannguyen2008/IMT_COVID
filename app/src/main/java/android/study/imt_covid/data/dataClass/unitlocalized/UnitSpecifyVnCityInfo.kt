@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.unitlocalized
+package android.study.imt_covid.data.dataClass.unitlocalized
 
 interface UnitSpecifyVnCityInfo {
     val city: String

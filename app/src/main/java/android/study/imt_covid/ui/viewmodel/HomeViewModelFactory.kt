@@ -1,15 +1,16 @@
-package android.study.imt_covid.viewmodel
+package android.study.imt_covid.ui.viewmodel
 
-import android.study.imt_covid.data.repository.VnSummaryRepository
+import android.study.imt_covid.data.repository.CovidRepository
+import android.study.imt_covid.viewmodel.HomeViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class HomeViewModelFactory(
-    private val VnSummaryRepository: VnSummaryRepository
+    private val CovidRepository: CovidRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return HomeViewModel(VnSummaryRepository) as T
+        return HomeViewModel(CovidRepository) as T
     }
 }

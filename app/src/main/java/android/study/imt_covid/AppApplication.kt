@@ -1,15 +1,15 @@
 package android.study.imt_covid
 
 import android.app.Application
-import android.study.imt_covid.data.dtbAndDAO.VnSummaryDtb
+import android.study.imt_covid.data.dtbAndDAO.CovidDtb
 import android.study.imt_covid.data.network.APIdata
 import android.study.imt_covid.data.network.networkSource.DataSource
 import android.study.imt_covid.data.network.networkSource.DataSourceImpl
 import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptor
 import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptorImpl
-import android.study.imt_covid.data.repository.VnSummaryRepository
-import android.study.imt_covid.data.repository.VnSummaryRepositoryImpl
-import android.study.imt_covid.viewmodel.HomeViewModelFactory
+import android.study.imt_covid.data.repository.CovidRepository
+import android.study.imt_covid.data.repository.CovidRepositoryImpl
+import android.study.imt_covid.ui.viewmodel.HomeViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -23,12 +23,21 @@ class AppApplication : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@AppApplication))
 
-        bind() from singleton { VnSummaryDtb(instance()) }
-        bind() from singleton { instance<VnSummaryDtb>().VnSummaryDAO() }
+        bind() from singleton { CovidDtb(instance()) }
+
+        bind() from singleton { instance<CovidDtb>().VnSummaryDAO() }
+        bind() from singleton { instance<CovidDtb>().VnCityDAO() }
+
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { APIdata(instance()) }
         bind<DataSource>() with singleton { DataSourceImpl(instance()) }
-        bind<VnSummaryRepository>() with singleton { VnSummaryRepositoryImpl(instance(), instance()) }
+        bind<CovidRepository>() with singleton {
+            CovidRepositoryImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
         bind() from provider { HomeViewModelFactory(instance()) }
     }
 

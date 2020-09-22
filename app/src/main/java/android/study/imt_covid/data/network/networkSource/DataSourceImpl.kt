@@ -1,8 +1,8 @@
 package android.study.imt_covid.data.network.networkSource
 
-import android.study.imt_covid.data.dataClass.VnCity
+import android.study.imt_covid.data.dataClass.entity.VnCity
 import android.study.imt_covid.data.dataClass.VnCityResponse
-import android.study.imt_covid.data.dataClass.VnSummary
+import android.study.imt_covid.data.dataClass.entity.VnSummary
 import android.study.imt_covid.data.dataClass.VnSummaryResponse
 import android.study.imt_covid.data.network.APIdata
 import android.study.imt_covid.internal.NoConnectivityException
@@ -23,7 +23,7 @@ class DataSourceImpl(
     override suspend fun fetchVnSummary(VnSummary: VnSummary) {
         try {
             val fetchedVnSummary = APIdata
-                .getVnSummaryData(VnSummary)
+                .getVnSummaryData()
                 .await()
             _downloadedVnSummary.postValue(fetchedVnSummary)
         }
@@ -41,7 +41,7 @@ class DataSourceImpl(
     override suspend fun fetchVnCity(VnCity: List<VnCity>) {
         try {
             val fetchedVnCity = APIdata
-                .getVnCityData(VnCity)
+                .getVnCityData()
                 .await()
             _downloadedVnCity.postValue(fetchedVnCity)
         }

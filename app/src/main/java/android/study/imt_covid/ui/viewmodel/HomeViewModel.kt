@@ -1,13 +1,14 @@
 package android.study.imt_covid.viewmodel
 
-import android.study.imt_covid.data.dataClass.VnSummary
-import android.study.imt_covid.data.repository.VnSummaryRepository
+import android.study.imt_covid.data.dataClass.entity.VnCity
+import android.study.imt_covid.data.dataClass.entity.VnSummary
+import android.study.imt_covid.data.repository.CovidRepository
 import android.study.imt_covid.internal.lazyDeferred
 import androidx.lifecycle.ViewModel
 
 
 class HomeViewModel(
-    val VnSummaryRepository: VnSummaryRepository
+    val CovidRepository: CovidRepository
 ) : ViewModel() {
 
     val vnSummary by lazyDeferred {
@@ -18,7 +19,7 @@ class HomeViewModel(
         val total = 0
         val newCases = 0
         val newDeath = 0
-        VnSummaryRepository.getVnSummary(
+        CovidRepository.getVnSummary(
             VnSummary(
                 diff,
                 recover,
@@ -27,6 +28,21 @@ class HomeViewModel(
                 total,
                 newCases,
                 newDeath
+            )
+        )
+    }
+    val vnCity by lazyDeferred {
+        val city = "nothing"
+        val totalCity = 0
+        val activeCity = 0
+        val recoveredCity = 0
+        val deathCity = 0
+        val diffCity = 0
+        CovidRepository.getVnCity(
+            listOf(
+                VnCity(
+                    city, totalCity, activeCity, recoveredCity, deathCity, diffCity
+                )
             )
         )
     }
