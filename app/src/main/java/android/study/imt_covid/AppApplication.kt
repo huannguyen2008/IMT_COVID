@@ -3,10 +3,10 @@ package android.study.imt_covid
 import android.app.Application
 import android.study.imt_covid.data.dtbAndDAO.VnSummaryDtb
 import android.study.imt_covid.data.network.APIdata
-import android.study.imt_covid.data.network.networkSource.VnSummarySource
-import android.study.imt_covid.data.network.networkSource.VnSummarySourceImpl
-import android.study.imt_covid.data.network.response.ConnectivityInterceptor
-import android.study.imt_covid.data.network.response.ConnectivityInterceptorImpl
+import android.study.imt_covid.data.network.networkSource.DataSource
+import android.study.imt_covid.data.network.networkSource.DataSourceImpl
+import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptor
+import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptorImpl
 import android.study.imt_covid.data.repository.VnSummaryRepository
 import android.study.imt_covid.data.repository.VnSummaryRepositoryImpl
 import android.study.imt_covid.viewmodel.HomeViewModelFactory
@@ -27,7 +27,7 @@ class AppApplication : Application(), KodeinAware {
         bind() from singleton { instance<VnSummaryDtb>().VnSummaryDAO() }
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { APIdata(instance()) }
-        bind<VnSummarySource>() with singleton { VnSummarySourceImpl(instance()) }
+        bind<DataSource>() with singleton { DataSourceImpl(instance()) }
         bind<VnSummaryRepository>() with singleton { VnSummaryRepositoryImpl(instance(), instance()) }
         bind() from provider { HomeViewModelFactory(instance()) }
     }

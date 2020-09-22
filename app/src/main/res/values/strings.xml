@@ -18,4 +18,6 @@
     <string name="recovered_cases">Recovered</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
     <string name="city_provinces">City/Provinces</string>
+    <string name="total">Total</string>
+    <string name="vietnam_summary">Vietnam Summary</string>
 </resources>

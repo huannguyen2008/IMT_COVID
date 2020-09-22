@@ -11,8 +11,10 @@
     <color name="extraExtraLightGray">#F5F8FA</color>
     <color name="red">#ffe81c4f</color>
     <color name="lightRed">#F3B4C3</color>
-    <color name="green">#B5F1B5</color>
-    <color name="yellow">#F4E882</color>
-
+    <color name="lightGreen">#DCFBDC</color>
+    <color name="green">#02FA38</color>
+    <color name="lightYellow">#FDFBE4</color>
+    <color name="yellow">#FFC800</color>
+    <color name="background">#343a40</color>
 
 </resources>
