@@ -1,4 +1,4 @@
-package android.study.imt_covid.fragments
+package android.study.imt_covid.viewmodel
 
 import androidx.lifecycle.ViewModel
 

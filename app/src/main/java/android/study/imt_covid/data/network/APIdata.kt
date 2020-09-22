@@ -1,9 +1,7 @@
 package android.study.imt_covid.data.network
 
-import android.study.imt_covid.data.dataClass.CaseInfo
-import android.study.imt_covid.data.dataClass.CaseInfoTypeConverter
+import android.study.imt_covid.data.dataClass.*
 import android.study.imt_covid.data.network.response.ConnectivityInterceptor
-import android.study.imt_covid.data.dataClass.TotalAndActiveResponse
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
@@ -16,14 +14,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
-const val API_KEY = "daily_data"
 
-// https://imt-covid19.herokuapp.com/vietnam/api?key=daily_data&filter_type=cases
+// https://imt-covid19.herokuapp.com/vietnam/api?key=summary
 interface APIdata {
 
     @GET(value = "api")
-    fun getCurrentData(@Query(value = "filter_type") TotalAndActive: String)
-            : Deferred<TotalAndActiveResponse>
+    fun getCurrentData(@Query(value = "summary") VnSummary: VnSummary)
+            : Deferred<VnSummaryResponse>
 
     companion object {
         operator fun invoke(
@@ -34,7 +31,7 @@ interface APIdata {
                 val url = chain.request()
                     .url()
                     .newBuilder()
-                    .addQueryParameter("key", API_KEY)
+                    .addQueryParameter("key", "summary")
                     .build()
                 val request = chain.request()
                     .newBuilder()
@@ -45,17 +42,18 @@ interface APIdata {
             }
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
-                .connectTimeout(120, TimeUnit.SECONDS)
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(connectivityInterceptor)
                 .build()
             val gson = GsonBuilder()
-                .registerTypeAdapter(CaseInfo::class.java, CaseInfoTypeConverter())
+                .registerTypeAdapter(VnSummary::class.java, VnSummaryTypeConverter())
                 .create()
 
             return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl("https://imt-covid19.herokuapp.com/vietnam/")
-                .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()

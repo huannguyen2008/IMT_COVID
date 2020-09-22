@@ -3,9 +3,9 @@ package android.study.imt_covid.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.study.imt_covid.R
-import android.study.imt_covid.fragments.HealthFragment
-import android.study.imt_covid.fragments.HomeFragment
-import android.study.imt_covid.fragments.MenuFragment
+import android.study.imt_covid.ui.fragments.HealthFragment
+import android.study.imt_covid.ui.fragments.HomeFragment
+import android.study.imt_covid.ui.fragments.MenuFragment
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_main.*
 

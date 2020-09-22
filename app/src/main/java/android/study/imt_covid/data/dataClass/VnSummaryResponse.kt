@@ -1,12 +1,10 @@
 package android.study.imt_covid.data.dataClass
 
 
-import android.study.imt_covid.data.dataClass.CaseInfo
 import com.google.gson.annotations.SerializedName
 
-data class TotalAndActiveResponse(
+data class VnSummaryResponse(
     @SerializedName(value = "data")
-    val TotalAndActive: List<CaseInfo>,
+    val VnSummary: VnSummary,
     val success: Boolean
 )
-

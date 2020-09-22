@@ -1,4 +1,4 @@
-package android.study.imt_covid.fragments
+package android.study.imt_covid.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
+import android.study.imt_covid.viewmodel.HealthViewModel
 import androidx.lifecycle.ViewModelProvider
 
 class HealthFragment : Fragment() {
