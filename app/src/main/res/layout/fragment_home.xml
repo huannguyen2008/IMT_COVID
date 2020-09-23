@@ -32,13 +32,13 @@
         app:layout_constraintTop_toBottomOf="@id/title" />
 
     <Button
-        android:backgroundTint="@color/white"
         android:id="@+id/test_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/summary_title"
         app:layout_constraintStart_toEndOf="@id/summary_title"
-        app:layout_constraintTop_toTopOf="@id/summary_title"
-        app:layout_constraintBottom_toBottomOf="@id/summary_title"/>
+        app:layout_constraintTop_toTopOf="@id/summary_title" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/total_cases"
@@ -66,25 +66,25 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="@color/red"
                 android:id="@+id/total_cases_number"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_margin="3dp"
                 android:text="@string/Default_number"
                 android:textAlignment="center"
+                android:textColor="@color/red"
                 android:textSize="@dimen/caption"
                 android:textStyle="normal" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/new_cases_number"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:background="@color/red"-->
-<!--                android:text="@string/default_plus"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textSize="@dimen/normal_text"-->
-<!--                android:textStyle="normal" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/new_cases_number"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:background="@color/red"-->
+            <!--                android:text="@string/default_plus"-->
+            <!--                android:textAlignment="center"-->
+            <!--                android:textSize="@dimen/normal_text"-->
+            <!--                android:textStyle="normal" />-->
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -115,13 +115,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="@color/black"
                 android:id="@+id/death_cases_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:text="@string/Default_number"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="@dimen/normal_text"
                 android:textStyle="normal" />
 
@@ -154,13 +154,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="@color/yellow"
                 android:id="@+id/active_cases_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:text="@string/Default_number"
                 android:textAlignment="center"
+                android:textColor="@color/yellow"
                 android:textSize="@dimen/normal_text"
                 android:textStyle="normal" />
 
@@ -193,13 +193,13 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="@color/green"
                 android:id="@+id/recovered_cases_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:text="@string/Default_number"
                 android:textAlignment="center"
+                android:textColor="@color/green"
                 android:textSize="@dimen/normal_text"
                 android:textStyle="normal" />
 
@@ -218,8 +218,51 @@
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintTop_toBottomOf="@id/active_cases" />
 
-    <TableLayout
+    <LinearLayout
+        android:layout_marginStart="@dimen/padding_left"
+        android:layout_marginEnd="@dimen/padding_left"
+        android:padding="10dp"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/table_border"
+        app:layout_constraintStart_toStartOf="@id/cases_city_title"
+        app:layout_constraintTop_toBottomOf="@id/cases_city_title">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/city_provinces"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/total"
+            android:textAlignment="center"
+            android:textColor="@color/red" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/recovered_cases"
+            android:textAlignment="center"
+            android:textColor="@color/green" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/death_cases"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TableLayout
         android:id="@+id/table_city"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -227,54 +270,22 @@
         android:layout_marginEnd="@dimen/padding_left"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/cases_city_title">
+        app:layout_constraintTop_toBottomOf="@id/header">
 
         <TableRow
             android:background="@drawable/table_border"
-            android:padding="@dimen/padding_left">
-
-            <TextView
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/city_provinces" />
-
-            <TextView
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/red"
-                android:text="@string/total" />
-
-            <TextView
-                android:textColor="@color/green"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/recovered_cases" />
-
-            <TextView
-                android:textColor="@color/black"
-                android:textAlignment="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/death_cases" />
+            android:paddingTop="5dp"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:backgroundTint="@color/white"
+                android:textColor="@color/black" />
         </TableRow>
+
 
     </TableLayout>
 
 
-    <TextView
-        android:text="@string/death_cases"
-        android:id="@+id/test_text"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/table_city" />
 </androidx.constraintlayout.widget.ConstraintLayout>

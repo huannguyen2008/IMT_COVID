@@ -1,20 +1,23 @@
 package android.study.imt_covid.data.dtbAndDAO
 
 import android.content.Context
-import android.study.imt_covid.data.dataClass.VnSummary
+import android.study.imt_covid.data.dataClass.entity.VnCity
+import android.study.imt_covid.data.dataClass.entity.VnSummary
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [VnSummary::class],
+    entities = [VnSummary::class, VnCity::class],
     version = 1
 )
-abstract class VnSummaryDtb: RoomDatabase() {
+abstract class CovidDtb: RoomDatabase() {
     abstract fun VnSummaryDAO(): VnSummaryDAO
+    abstract fun VnCityDAO(): VnCityDAO
+
 
     companion object{
-        @Volatile private var instance: VnSummaryDtb? = null
+        @Volatile private var instance: CovidDtb? = null
         private var LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
@@ -23,7 +26,7 @@ abstract class VnSummaryDtb: RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext,
-                VnSummaryDtb::class.java, "vn_summary.db")
+                CovidDtb::class.java, "covid.db")
                 .build()
     }
 }

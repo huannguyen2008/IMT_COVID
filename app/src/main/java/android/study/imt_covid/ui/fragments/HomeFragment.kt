@@ -7,12 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
 import android.study.imt_covid.activities.ChartActivity
+import android.study.imt_covid.data.dataClass.entity.VnCity
 import android.study.imt_covid.data.dataClass.entity.VnSummary
+import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.viewmodel.HomeViewModel
 import android.study.imt_covid.ui.viewmodel.HomeViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.PrimaryKey
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.launch
@@ -58,19 +64,39 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val vnCity = viewModel.vnCity.await()
         vnCity.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            test_text.text = it.toString()
+            initRecycleView(it .toVnCityItem())
         })
     }
-    private fun updateTotal(total: Int){
+
+    private fun updateTotal(total: Int) {
         total_cases_number.text = total.toString()
     }
-    private fun updateActive(active: Int){
+
+    private fun updateActive(active: Int) {
         active_cases_number.text = active.toString()
     }
-    private fun updateRecovered(recovered: Int){
+
+    private fun updateRecovered(recovered: Int) {
         recovered_cases_number.text = recovered.toString()
     }
-    private fun updateDeath(death: Int){
+
+    private fun updateDeath(death: Int) {
         death_cases_number.text = death.toString()
+    }
+
+
+    private fun List<UnitSpecifyVnCityInfo>.toVnCityItem(): List<VnCityItem>{
+        return this.map {
+            VnCityItem(it)
+        }
+    }
+    private fun initRecycleView(item: List<VnCityItem>){
+        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(item)
+        }
+        recycleView.apply{
+            layoutManager = LinearLayoutManager(this@HomeFragment.context)
+            adapter = groupAdapter
+        }
     }
 }

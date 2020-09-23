@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:orientation="horizontal"
+    android:backgroundTint="@color/white">
+
+    <TextView
+        android:id="@+id/city_name"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:text="@string/city_provinces"
+        android:textColor="@color/black"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/total_of_city"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:text="@string/Default_number"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/recovered_of_city"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+
+        android:text="@string/Default_number"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/death_of_city"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="@string/Default_number"
+        android:textAlignment="center" />
+</LinearLayout>
