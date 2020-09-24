@@ -1,4 +1,4 @@
-package android.study.imt_covid.activities
+package android.study.imt_covid.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

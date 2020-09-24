@@ -1,20 +1,21 @@
 package android.study.imt_covid.data.dtbAndDAO
 
 import android.content.Context
-import android.study.imt_covid.data.dataClass.entity.VnCity
-import android.study.imt_covid.data.dataClass.entity.VnSummary
+import android.study.imt_covid.data.dataClass.entity.*
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [VnSummary::class, VnCity::class],
+    entities = [VnSummary::class, VnCity::class,VnNationality::class,VnGender::class,VnAge::class],
     version = 1
 )
 abstract class CovidDtb: RoomDatabase() {
     abstract fun VnSummaryDAO(): VnSummaryDAO
     abstract fun VnCityDAO(): VnCityDAO
-
+    abstract fun VnNationalityDAO(): VnNationalityDAO
+    abstract fun VnGenderDAO(): VnGenderDAO
+    abstract fun VnAgeDAO(): VnAgeDAO
 
     companion object{
         @Volatile private var instance: CovidDtb? = null

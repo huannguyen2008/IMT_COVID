@@ -1,9 +1,7 @@
 package android.study.imt_covid.data.network.networkSource
 
-import android.study.imt_covid.data.dataClass.entity.VnCity
-import android.study.imt_covid.data.dataClass.VnCityResponse
-import android.study.imt_covid.data.dataClass.entity.VnSummary
-import android.study.imt_covid.data.dataClass.VnSummaryResponse
+import android.study.imt_covid.data.dataClass.entity.*
+import android.study.imt_covid.data.dataClass.response.*
 import android.study.imt_covid.data.network.APIdata
 import android.study.imt_covid.internal.NoConnectivityException
 import android.util.Log
@@ -44,6 +42,57 @@ class DataSourceImpl(
                 .getVnCityData()
                 .await()
             _downloadedVnCity.postValue(fetchedVnCity)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
+    // get VN nationality
+    private val _downloadedVnNationality = MutableLiveData<VnNationalityResponse>()
+    override val downloadedVnNationality: LiveData<VnNationalityResponse>
+        get() = _downloadedVnNationality
+
+
+    override suspend fun fetchVnNationality(VnNationality: List<VnNationality>) {
+        try {
+            val fetchedVnNationality = APIdata
+                .getVnNationalityData()
+                .await()
+            _downloadedVnNationality.postValue(fetchedVnNationality)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
+    // get VN gender
+    private val _downloadedVnGender = MutableLiveData<VnGenderResponse>()
+    override val downloadedVnGender: LiveData<VnGenderResponse>
+        get() = _downloadedVnGender
+
+
+    override suspend fun fetchVnGender(VnGender: VnGender) {
+        try {
+            val fetchedVnGender = APIdata
+                .getVnGenderData()
+                .await()
+            _downloadedVnGender.postValue(fetchedVnGender)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
+    // get VN age
+    private val _downloadedVnAge = MutableLiveData<VnAgeResponse>()
+    override val downloadedVnAge: LiveData<VnAgeResponse>
+        get() = _downloadedVnAge
+
+
+    override suspend fun fetchVnAge(VnAge: List<VnAge>) {
+        try {
+            val fetchedVnAge = APIdata
+                .getVnAgeData()
+                .await()
+            _downloadedVnAge.postValue(fetchedVnAge)
         }
         catch (e: NoConnectivityException){
             Log.e("Connectivity","No internet connection!",e)

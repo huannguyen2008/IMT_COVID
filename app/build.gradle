@@ -24,7 +24,9 @@ android {
         }
     }
 }
-
+androidExtensions {
+    experimental = true
+}
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -80,4 +82,8 @@ dependencies {
 
     // draw chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // Groupie RecyclerView
+    implementation 'com.xwray:groupie:2.1.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.1.0'
 }

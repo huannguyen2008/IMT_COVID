@@ -4,10 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HealthFragment">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/text_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/health" />
-
+    <TextView
+        android:id="@+id/text_test2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/health" />
+    <TextView
+        android:id="@+id/text_test3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/health" />
+</LinearLayout>
 </FrameLayout>

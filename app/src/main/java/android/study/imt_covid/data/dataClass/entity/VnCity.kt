@@ -17,9 +17,7 @@ data class VnCity(
     override val recoveredCity: Int,
     override val deathCity: Int,
     override val diffCity: Int
-) : UnitSpecifyVnCityInfo{
-
-}
+) : UnitSpecifyVnCityInfo
 
 // convert json file List<List<Any>>
 class VnCityTypeConverter : TypeAdapter<VnCity>() {

@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.dataClass
+package android.study.imt_covid.data.dataClass.response
 
 
 import android.study.imt_covid.data.dataClass.entity.VnCity

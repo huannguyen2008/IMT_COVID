@@ -15,5 +15,5 @@ interface VnSummaryDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun upsert (VnSummary: VnSummary)
     @Query(value = "select * from vn_summary where id= $VN_SUM_ID")
-    fun getVnDataSummary(): LiveData<VnSummary>
+    fun getVnSummaryData(): LiveData<VnSummary>
 }

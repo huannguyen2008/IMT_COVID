@@ -27,8 +27,8 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 
 class HomeFragment : ScopedFragment(), KodeinAware {
-    override val kodein by closestKodein()
 
+    override val kodein by closestKodein()
     private lateinit var viewModel: HomeViewModel
 
     override fun onCreateView(
