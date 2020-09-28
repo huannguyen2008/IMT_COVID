@@ -7,10 +7,10 @@ import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 
-const val VN_SUM_ID = 0
+const val WORLD_SUM_ID = 0
 
-@Entity(tableName = "vn_summary")
-data class VnSummary(
+@Entity(tableName = "world_summary")
+data class WorldSummary(
     override val diff: Int,
     override val recover: Int,
     override val totalDeath: Int,
@@ -20,16 +20,16 @@ data class VnSummary(
     override val newDeath: Int
 ): UnitSpecifySummaryInfo {
     @PrimaryKey(autoGenerate = false)
-    var id: Int = VN_SUM_ID
+    var id: Int = WORLD_SUM_ID
 }
 
 // convert json file <list<any>>
-class VnSummaryTypeConverter : TypeAdapter<VnSummary>() {
-    override fun write(out: JsonWriter?, value: VnSummary?) {
+class WorldSummaryTypeConverter : TypeAdapter<WorldSummary>() {
+    override fun write(out: JsonWriter?, value: WorldSummary?) {
 
     }
 
-    override fun read(reader: JsonReader?): VnSummary? {
+    override fun read(reader: JsonReader?): WorldSummary? {
         reader?.beginArray()
         val diff: Int? = reader?.nextInt()
         val recover: Int? = reader?.nextInt()
@@ -44,6 +44,6 @@ class VnSummaryTypeConverter : TypeAdapter<VnSummary>() {
         ) {
             return null
         }
-        return VnSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
+        return WorldSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
     }
 }

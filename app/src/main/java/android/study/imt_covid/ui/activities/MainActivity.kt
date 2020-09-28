@@ -3,37 +3,30 @@ package android.study.imt_covid.ui.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.study.imt_covid.R
-import android.study.imt_covid.ui.fragments.HealthFragment
-import android.study.imt_covid.ui.fragments.HomeFragment
-import android.study.imt_covid.ui.fragments.MenuFragment
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val homeFrag = HomeFragment()
-        val healthFrag = HealthFragment()
-        val menuFrag = MenuFragment()
 
-        makeCurrentFrag(homeFrag)
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+        bot_nav.setupWithNavController(navController)
 
-        bot_nav.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.ic_home -> makeCurrentFrag(homeFrag)
-                R.id.ic_health -> makeCurrentFrag(healthFrag)
-                R.id.ic_menu -> makeCurrentFrag(menuFrag)
-            }
-            true
-        }
     }
 
-    private fun makeCurrentFrag(fragment: Fragment) =
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.fl_wrapper, fragment)
-            commit()
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return NavigationUI.navigateUp(navController,null)
+    }
+
 
 }
+
+

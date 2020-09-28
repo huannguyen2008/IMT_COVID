@@ -1,26 +1,21 @@
 package android.study.imt_covid.ui.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
-import android.study.imt_covid.activities.ChartActivity
-import android.study.imt_covid.data.dataClass.entity.VnCity
-import android.study.imt_covid.data.dataClass.entity.VnSummary
 import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.viewmodel.HomeViewModel
-import android.study.imt_covid.ui.viewmodel.HomeViewModelFactory
+import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.PrimaryKey
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -30,18 +25,13 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private lateinit var viewModel: HomeViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-        view.test_button.setOnClickListener {
-            val intent = Intent(activity, ChartActivity::class.java)
-            activity?.startActivity(intent)
-        }
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -49,27 +39,33 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HomeViewModel::class.java)
         bindUI()
+        detail_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.chartFragment, null))
+
     }
 
     private fun bindUI() = launch {
         val vnSum = viewModel.vnSummary.await()
-
         vnSum.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            updateTotal(it.total)
+            updateTotal(it.total, it.newCases)
             updateActive(it.active)
             updateRecovered(it.recover)
-            updateDeath(it.totalDeath)
+            updateDeath(it.totalDeath, it.newDeath)
         })
         val vnCity = viewModel.vnCity.await()
         vnCity.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            initRecycleView(it .toVnCityItem())
+            initRecycleView(it.toVnCityItem())
+        })
+        val vnWorld = viewModel.worldSummary.await()
+        vnWorld.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            note_vietnam.text = it.toString()
         })
     }
 
-    private fun updateTotal(total: Int) {
-        total_cases_number.text = total.toString()
+    private fun updateTotal(total: Int, newCases: Int) {
+        total_cases_number.text = ("$total + $newCases↑")
     }
 
     private fun updateActive(active: Int) {
@@ -80,21 +76,22 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         recovered_cases_number.text = recovered.toString()
     }
 
-    private fun updateDeath(death: Int) {
-        death_cases_number.text = death.toString()
+    private fun updateDeath(death: Int, newDeath: Int) {
+        death_cases_number.text = ("$death + $newDeath↑")
     }
 
 
-    private fun List<UnitSpecifyVnCityInfo>.toVnCityItem(): List<VnCityItem>{
+    private fun List<UnitSpecifyVnCityInfo>.toVnCityItem(): List<VnCityItem> {
         return this.map {
             VnCityItem(it)
         }
     }
-    private fun initRecycleView(item: List<VnCityItem>){
+
+    private fun initRecycleView(item: List<VnCityItem>) {
         val groupAdapter = GroupAdapter<ViewHolder>().apply {
             addAll(item)
         }
-        recycleView.apply{
+        recycleView.apply {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)
             adapter = groupAdapter
         }

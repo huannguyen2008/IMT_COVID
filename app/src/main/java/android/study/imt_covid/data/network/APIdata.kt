@@ -8,6 +8,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -17,24 +18,29 @@ import java.util.concurrent.TimeUnit
 
 // https://imt-covid19.herokuapp.com/vietnam/api?key=summary
 // https://imt-covid19.herokuapp.com/vietnam/api?key=city_summary
+// https://imt-covid19.herokuapp.com/index/api?key=summary
 interface APIdata {
-    @GET(value = "api")
+    @GET(value = "vietnam/api")
     fun getVnSummaryData(@Query(value = "key") key: String = "summary")
             : Deferred<VnSummaryResponse>
 
-    @GET(value = "api")
+    @GET(value = "index/api")
+    fun getWorldSummaryData(@Query(value = "key") key: String = "summary")
+            : Deferred<WorldSummaryResponse>
+
+    @GET(value = "vietnam/api")
     fun getVnCityData(@Query(value = "key") key: String = "city_summary")
             : Deferred<VnCityResponse>
 
-    @GET(value = "api")
+    @GET(value = "vietnam/api")
     fun getVnNationalityData(@Query(value = "key") key: String = "nationality")
             : Deferred<VnNationalityResponse>
 
-    @GET(value = "api")
+    @GET(value = "vietnam/api")
     fun getVnGenderData(@Query(value = "key") key: String = "gender")
             : Deferred<VnGenderResponse>
 
-    @GET(value = "api")
+    @GET(value = "vietnam/api")
     fun getVnAgeData(@Query(value = "key") key: String = "age")
             : Deferred<VnAgeResponse>
 
@@ -61,6 +67,7 @@ interface APIdata {
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(connectivityInterceptor)
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
             val gson = GsonBuilder()
                 .registerTypeAdapter(VnSummary::class.java, VnSummaryTypeConverter())
@@ -68,10 +75,11 @@ interface APIdata {
                 .registerTypeAdapter(VnNationality::class.java, VnNationalityTypeConverter())
                 .registerTypeAdapter(VnGender::class.java, VnGenderTypeConverter())
                 .registerTypeAdapter(VnAge::class.java, VnAgeTypeConverter())
+                .registerTypeAdapter(WorldSummary::class.java, WorldSummaryTypeConverter())
                 .create()
             return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://imt-covid19.herokuapp.com/vietnam/")
+                .baseUrl("https://imt-covid19.herokuapp.com/")
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()

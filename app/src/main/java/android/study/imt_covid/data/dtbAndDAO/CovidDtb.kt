@@ -7,7 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [VnSummary::class, VnCity::class,VnNationality::class,VnGender::class,VnAge::class],
+    entities = [VnSummary::class, VnCity::class,VnNationality::class,VnGender::class,VnAge::class,WorldSummary::class],
     version = 1
 )
 abstract class CovidDtb: RoomDatabase() {
@@ -16,6 +16,7 @@ abstract class CovidDtb: RoomDatabase() {
     abstract fun VnNationalityDAO(): VnNationalityDAO
     abstract fun VnGenderDAO(): VnGenderDAO
     abstract fun VnAgeDAO(): VnAgeDAO
+    abstract fun WorldSummaryDAO(): WorldSummaryDAO
 
     companion object{
         @Volatile private var instance: CovidDtb? = null

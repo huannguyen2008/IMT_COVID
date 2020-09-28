@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/ic_home"
+        android:id="@+id/homeFragment"
         android:enabled="true"
         android:icon="@drawable/ic_home"
         android:title="@string/home" />
     <item
-        android:id="@+id/ic_health"
+        android:id="@+id/informationFragment"
         android:enabled="true"
-        android:icon="@drawable/ic_health"
-        android:title="@string/health" />
+        android:icon="@drawable/ic_references"
+        android:title="@string/information" />
     <item
-        android:id="@+id/ic_menu"
+        android:id="@+id/menuFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu"
         android:title="@string/menu" />

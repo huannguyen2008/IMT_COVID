@@ -1,7 +1,6 @@
 package android.study.imt_covid.data.dataClass.entity
 
 import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnGenderInfo
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnSummaryInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter

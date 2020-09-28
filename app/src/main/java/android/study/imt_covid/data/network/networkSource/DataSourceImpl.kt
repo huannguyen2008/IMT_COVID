@@ -29,7 +29,23 @@ class DataSourceImpl(
             Log.e("Connectivity","No internet connection!",e)
         }
     }
+    // get VN summary
+    private val _downloadedWorldSummary = MutableLiveData<WorldSummaryResponse>()
+    override val downloadedWorldSummary: LiveData<WorldSummaryResponse>
+        get() = _downloadedWorldSummary
 
+
+    override suspend fun fetchWorldSummary(WorldSummary: WorldSummary) {
+        try {
+            val fetchedWorldSummary = APIdata
+                .getWorldSummaryData()
+                .await()
+            _downloadedWorldSummary.postValue(fetchedWorldSummary)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
     // get city VN summary
     private val _downloadedVnCity = MutableLiveData<VnCityResponse>()
     override val downloadedVnCity: LiveData<VnCityResponse>

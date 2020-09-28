@@ -7,8 +7,9 @@ import android.study.imt_covid.data.repository.CovidRepository
 import android.study.imt_covid.internal.lazyDeferred
 import androidx.lifecycle.ViewModel
 
-class HealthViewModel(
+class ChartViewModel(
     val CovidRepository: CovidRepository
+
 ) : ViewModel() {
     val vnNation by lazyDeferred {
         val nationality = "nothing"

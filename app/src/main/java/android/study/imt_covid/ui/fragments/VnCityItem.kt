@@ -20,6 +20,7 @@ class VnCityItem(
         city_name.text = VnCity.city
         total_of_city.text = VnCity.totalCity.toString()
         recovered_of_city.text = VnCity.recoveredCity.toString()
+        active_of_city.text = VnCity.activeCity.toString()
         death_of_city.text = VnCity.deathCity.toString()
     }
 }

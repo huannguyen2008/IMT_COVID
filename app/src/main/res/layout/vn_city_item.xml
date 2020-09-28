@@ -3,39 +3,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="30dp"
+    android:backgroundTint="@color/white"
     android:orientation="horizontal"
-    android:backgroundTint="@color/white">
+    android:weightSum="1.2">
 
     <TextView
         android:id="@+id/city_name"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="0.4"
         android:text="@string/city_provinces"
-        android:textColor="@color/black"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/total_of_city"
-        android:layout_width="50dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/red"
+        android:layout_weight="0.2"
         android:text="@string/Default_number"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/red" />
 
     <TextView
         android:id="@+id/recovered_of_city"
-        android:layout_width="85dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/green"
-
+        android:layout_weight="0.2"
         android:text="@string/Default_number"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/green" />
 
     <TextView
-        android:id="@+id/death_of_city"
-        android:layout_width="80dp"
+        android:id="@+id/active_of_city"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"
+        android:layout_weight="0.2"
         android:text="@string/Default_number"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/yellow" />
+    <TextView
+        android:id="@+id/death_of_city"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.2"
+        android:text="@string/Default_number"
+        android:textAlignment="center"
+        android:textColor="@color/black" />
 </LinearLayout>

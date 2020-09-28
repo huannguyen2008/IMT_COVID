@@ -9,8 +9,9 @@ import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptor
 import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptorImpl
 import android.study.imt_covid.data.repository.CovidRepository
 import android.study.imt_covid.data.repository.CovidRepositoryImpl
-import android.study.imt_covid.ui.viewmodel.HealthViewModelFactory
-import android.study.imt_covid.ui.viewmodel.HomeViewModelFactory
+import android.study.imt_covid.ui.viewmodel.factory.ChartViewModelFactory
+import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
+import android.study.imt_covid.ui.viewmodel.factory.InformationViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -27,6 +28,7 @@ class AppApplication : Application(), KodeinAware {
         bind() from singleton { CovidDtb(instance()) }
 
         bind() from singleton { instance<CovidDtb>().VnSummaryDAO() }
+        bind() from singleton { instance<CovidDtb>().WorldSummaryDAO() }
         bind() from singleton { instance<CovidDtb>().VnCityDAO() }
         bind() from singleton { instance<CovidDtb>().VnNationalityDAO() }
         bind() from singleton { instance<CovidDtb>().VnGenderDAO() }
@@ -43,11 +45,13 @@ class AppApplication : Application(), KodeinAware {
                 instance(),
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
         bind() from provider { HomeViewModelFactory(instance()) }
-        bind() from provider { HealthViewModelFactory(instance()) }
+        bind() from provider { InformationViewModelFactory(instance()) }
+        bind() from provider { ChartViewModelFactory(instance()) }
 
     }
 

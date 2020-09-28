@@ -1,6 +1,6 @@
 package android.study.imt_covid.data.dataClass.unitlocalized
 
-interface UnitSpecifyVnSummaryInfo {
+interface UnitSpecifySummaryInfo {
     val diff: Int
     val recover: Int
     val totalDeath: Int

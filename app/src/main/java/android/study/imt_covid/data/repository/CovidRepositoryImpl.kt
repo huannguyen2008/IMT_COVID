@@ -2,24 +2,19 @@ package android.study.imt_covid.data.repository
 
 import android.study.imt_covid.data.dataClass.entity.*
 import android.study.imt_covid.data.dataClass.response.*
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnGenderInfo
 import android.study.imt_covid.data.network.networkSource.DataSource
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnSummaryInfo
 import android.study.imt_covid.data.dtbAndDAO.*
 import androidx.lifecycle.LiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.threeten.bp.ZonedDateTime
 
 class CovidRepositoryImpl(
-    private val VnSummaryDAO: VnSummaryDAO,
+    val VnSummaryDAO: VnSummaryDAO,
     private val VnCityDAO: VnCityDAO,
     private val VnNationalityDAO: VnNationalityDAO,
     private val VnGenderDAO: VnGenderDAO,
     private val VnAgeDAO: VnAgeDAO,
-
+    private val WorldSummaryDAO: WorldSummaryDAO,
     private val DataSource: DataSource
 ) : CovidRepository {
 
@@ -40,40 +35,60 @@ class CovidRepositoryImpl(
             downloadedVnAge.observeForever { newVnAge ->
                 persistFetchedVnAge(newVnAge)
             }
+            downloadedWorldSummary.observeForever { newWorldSummary ->
+                persistFetchedWorldSummary(newWorldSummary)
+            }
         }
     }
 
     override suspend fun getVnSummary(VnSummary: VnSummary): LiveData<out VnSummary> {
         return withContext(Dispatchers.IO) {
-            initData()
+            async {
+                initData()
+            }
             return@withContext VnSummaryDAO.getVnSummaryData()
         }
     }
-
+    override suspend fun getWorldSummary(WorldSummary: WorldSummary): LiveData<out WorldSummary> {
+        return withContext(Dispatchers.IO) {
+            async {
+                initData()
+            }
+            return@withContext WorldSummaryDAO.getWorldSummaryData()
+        }
+    }
     override suspend fun getVnCity(VnCity: List<VnCity>): LiveData<out List<VnCity>> {
         return withContext(Dispatchers.IO) {
-            initData()
+            async {
+                initData()
+            }
             return@withContext VnCityDAO.getVnCityData()
         }
     }
 
     override suspend fun getVnNationality(VnNationality: List<VnNationality>): LiveData<out List<VnNationality>> {
         return withContext(Dispatchers.IO) {
-            initData()
+            async {
+                initData()
+            }
             return@withContext VnNationalityDAO.getVnNationalityData()
         }
     }
 
     override suspend fun getVnGender(VnGender: VnGender): LiveData<out VnGender> {
         return withContext(Dispatchers.IO) {
-            initData()
+            async {
+                initData()
+            }
             return@withContext VnGenderDAO.getVnGenderData()
         }
     }
 
     override suspend fun getVnAge(VnAge: List<VnAge>): LiveData<out List<VnAge>> {
         return withContext(Dispatchers.IO) {
-            initData()
+            async {
+                initData()
+            }
             return@withContext VnAgeDAO.getVnAgeData()
         }
     }
@@ -83,7 +98,11 @@ class CovidRepositoryImpl(
             VnSummaryDAO.upsert(fetchedVnSummary.VnSummary)
         }
     }
-
+    private fun persistFetchedWorldSummary(fetchedWorldSummary: WorldSummaryResponse) {
+        GlobalScope.launch(Dispatchers.IO) {
+            WorldSummaryDAO.upsert(fetchedWorldSummary.WorldSummary)
+        }
+    }
     private fun persistFetchedVnCity(fetchedVnCity: VnCityResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             VnCityDAO.upsert(fetchedVnCity.VnCity)
@@ -109,21 +128,12 @@ class CovidRepositoryImpl(
     }
 
     private suspend fun initData() {
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1))) {
             fetchVnSummary()
-        }
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1))) {
+            fetchWorldSummary()
             fetchVnCity()
-        }
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1))) {
-            fetchVnNationality()
-        }
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1))) {
+//            fetchVnNationality()
             fetchVnGender()
-        }
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1))) {
             fetchVnAge()
-        }
     }
 
     private suspend fun fetchVnSummary() {
@@ -138,7 +148,18 @@ class CovidRepositoryImpl(
             VnSummary = VnSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
         )
     }
-
+    private suspend fun fetchWorldSummary() {
+        val diff = 0
+        val recover = 0
+        val totalDeath = 0
+        val active = 0
+        val total = 0
+        val newCases = 0
+        val newDeath = 0
+        DataSource.fetchWorldSummary(
+            WorldSummary = WorldSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
+        )
+    }
 
     private suspend fun fetchVnCity() {
         val city = "nothing"
@@ -174,9 +195,9 @@ class CovidRepositoryImpl(
         DataSource.fetchVnAge(listAge)
     }
 
-    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(30)
-        return lastFetchTime.isBefore(thirtyMinAgo)
-    }
+//    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
+//        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(1440)
+//        return lastFetchTime.isBefore(thirtyMinAgo)
+//    }
 
 }

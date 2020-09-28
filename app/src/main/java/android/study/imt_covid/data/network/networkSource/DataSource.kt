@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 
 interface DataSource {
     val downloadedVnSummary: LiveData<VnSummaryResponse>
+    val downloadedWorldSummary: LiveData<WorldSummaryResponse>
     val downloadedVnCity: LiveData<VnCityResponse>
     val downloadedVnNationality: LiveData<VnNationalityResponse>
     val downloadedVnGender: LiveData<VnGenderResponse>
@@ -15,7 +16,9 @@ interface DataSource {
     suspend fun fetchVnSummary(
         VnSummary: VnSummary
     )
-
+    suspend fun fetchWorldSummary(
+        WorldSummary: WorldSummary
+    )
     suspend fun fetchVnCity(
         VnCity: List<VnCity>
     )
