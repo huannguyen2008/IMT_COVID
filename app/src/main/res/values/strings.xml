@@ -12,7 +12,7 @@
         <item name="vietnam_summary">Vietnam Summary</item>
         <item name="world_summary">Summary Worldwide</item>
     </string-array>
-    <string name="last_update_at_today">Last update at today</string>
+    <string name="last_update">Last update at %1$s</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
     <string name="city_provinces">City/Provinces</string>
     <string name="total_cases">Total cases(T)</string>

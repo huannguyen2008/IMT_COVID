@@ -22,6 +22,10 @@ import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.format.DateTimeFormatter
+
 
 class HomeFragment : ScopedFragment(), KodeinAware {
 
@@ -70,10 +74,9 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 position: Int,
                 id: Long
             ) {
-                if (summary_title_spinner.selectedItemPosition == 0){
+                if (summary_title_spinner.selectedItemPosition == 0) {
                     bindUIVn()
-                }
-                else{
+                } else {
                     bindUIWorld()
                 }
             }
@@ -101,6 +104,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         })
 
     }
+
     private fun bindUIWorld() = launch {
         val vnWorld = viewModel.worldSummary.await()
         vnWorld.observe(viewLifecycleOwner, Observer {
@@ -112,13 +116,17 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         })
 
     }
+
     private fun bindLastUpdate() = launch {
         val lastUpdate = viewModel.lastUpdate.await()
         lastUpdate.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            time_update.text = it.toString()
+            val date = LocalDateTime.parse(it.lastUpdate)
+                .format(DateTimeFormatter.ofPattern("EEE,dd MMM,yyyy,HH:mm:ss"))
+            time_update.text = getString(R.string.last_update, date)
         })
     }
+
     private fun updateTotal(total: Int, newCases: Int) {
         total_cases_number.text = ("$total + $newCases↑")
     }
