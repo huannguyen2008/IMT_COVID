@@ -14,6 +14,7 @@
     </string-array>
     <string name="last_update">Last update at %1$s</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
+    <string name="country_region">Country/Region</string>
     <string name="city_provinces">City/Provinces</string>
     <string name="total_cases">Total cases(T)</string>
     <string name="death_cases">Death(D)</string>

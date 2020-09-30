@@ -131,4 +131,21 @@ class DataSourceImpl(
             Log.e("Connectivity","No internet connection!",e)
         }
     }
+    // get country summary
+    private val _downloadedCountrySummary = MutableLiveData<CountrySummaryResponse>()
+    override val downloadedCountrySummary: LiveData<CountrySummaryResponse>
+        get() = _downloadedCountrySummary
+
+
+    override suspend fun fetchCountrySummary(CountrySummary: List<CountrySummary>) {
+        try {
+            val fetchedLastUpdate = APIdata
+                .getCountrySummaryData()
+                .await()
+            _downloadedCountrySummary.postValue(fetchedLastUpdate)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
 }

@@ -34,12 +34,14 @@ class AppApplication : Application(), KodeinAware {
         bind() from singleton { instance<CovidDtb>().VnGenderDAO() }
         bind() from singleton { instance<CovidDtb>().VnAgeDAO() }
         bind() from singleton { instance<CovidDtb>().LastUpdateDAO() }
+        bind() from singleton { instance<CovidDtb>().CountrySummaryDAO() }
 
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
         bind() from singleton { APIdata(instance()) }
         bind<DataSource>() with singleton { DataSourceImpl(instance()) }
         bind<CovidRepository>() with singleton {
             CovidRepositoryImpl(
+                instance(),
                 instance(),
                 instance(),
                 instance(),

@@ -12,6 +12,7 @@ interface DataSource {
     val downloadedVnGender: LiveData<VnGenderResponse>
     val downloadedVnAge: LiveData<VnAgeResponse>
     val downloadedLastUpdate: LiveData<LastUpdateResponse>
+    val downloadedCountrySummary: LiveData<CountrySummaryResponse>
 
     suspend fun fetchVnSummary(
         VnSummary: VnSummary
@@ -35,5 +36,8 @@ interface DataSource {
     )
     suspend fun fetchLastUpdate(
         LastUpdate: LastUpdate
+    )
+    suspend fun fetchCountrySummary(
+        CountrySummary: List<CountrySummary>
     )
 }

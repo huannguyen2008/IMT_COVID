@@ -11,6 +11,5 @@ interface CovidRepository {
     suspend fun getVnAge(VnAge: List<VnAge>): LiveData<out List<VnAge>>
     suspend fun getWorldSummary(WorldSummary: WorldSummary): LiveData<out WorldSummary>
     suspend fun getLastUpdate(LastUpdate: LastUpdate): LiveData<out LastUpdate>
-
-
+    suspend fun getCountrySummary(CountrySummary: List<CountrySummary>): LiveData<out List<CountrySummary>>
 }

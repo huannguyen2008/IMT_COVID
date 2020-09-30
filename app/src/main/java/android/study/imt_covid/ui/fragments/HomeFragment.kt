@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
+import android.study.imt_covid.data.dataClass.entity.CountrySummary
+import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyCountrySummaryInfo
 import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.viewmodel.HomeViewModel
@@ -23,7 +25,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDateTime
-import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 
@@ -52,9 +53,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 null
             )
         )
-//        bindUIVn()
-//        bindUIWorld()
         bindLastUpdate()
+        setupSpinner()
+    }
+
+    private fun setupSpinner(){
         // spinner title
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(
@@ -76,8 +79,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             ) {
                 if (summary_title_spinner.selectedItemPosition == 0) {
                     bindUIVn()
+                    city_or_country.text = getString(R.string.city_provinces)
                 } else {
                     bindUIWorld()
+                    city_or_country.text = getString(R.string.country_region)
+                    note_vietnam.text = null
                 }
             }
 
@@ -87,7 +93,6 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
         }
     }
-
     private fun bindUIVn() = launch {
         val vnSum = viewModel.vnSummary.await()
         vnSum.observe(viewLifecycleOwner, Observer {
@@ -100,7 +105,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val vnCity = viewModel.vnCity.await()
         vnCity.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            initRecycleView(it.toVnCityItem())
+            initRecycleViewCityVn(it.toVnCityItem())
         })
 
     }
@@ -114,7 +119,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             updateRecovered(it.recover)
             updateDeath(it.totalDeath, it.newDeath)
         })
-
+        val countrySum = viewModel.countrySummary.await()
+        countrySum.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            initRecycleViewCountry(it.toCountryItem())
+        })
     }
 
     private fun bindLastUpdate() = launch {
@@ -122,7 +131,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         lastUpdate.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
             val date = LocalDateTime.parse(it.lastUpdate)
-                .format(DateTimeFormatter.ofPattern("EEE,dd MMM,yyyy,HH:mm:ss"))
+                .format(DateTimeFormatter.ofPattern("EEE, dd MMM, yyyy, HH:mm:ss"))
             time_update.text = getString(R.string.last_update, date)
         })
     }
@@ -143,18 +152,34 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         death_cases_number.text = ("$death + $newDeath↑")
     }
 
-
+    // parse vn city to recycle view
     private fun List<UnitSpecifyVnCityInfo>.toVnCityItem(): List<VnCityItem> {
         return this.map {
             VnCityItem(it)
         }
     }
 
-    private fun initRecycleView(item: List<VnCityItem>) {
+    private fun initRecycleViewCityVn(item: List<VnCityItem>) {
         val groupAdapter = GroupAdapter<ViewHolder>().apply {
             addAll(item)
         }
-        recycleView.apply {
+        recycle_view.apply {
+            layoutManager = LinearLayoutManager(this@HomeFragment.context)
+            adapter = groupAdapter
+        }
+    }
+    // parse world country to recycle view
+    private fun List<UnitSpecifyCountrySummaryInfo>.toCountryItem(): List<WorldCountryItem> {
+        return this.map {
+            WorldCountryItem(it)
+        }
+    }
+
+    private fun initRecycleViewCountry(item: List<WorldCountryItem>) {
+        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+            addAll(item)
+        }
+        recycle_view.apply {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)
             adapter = groupAdapter
         }

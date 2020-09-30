@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [VnSummary::class, VnCity::class, VnNationality::class,
-        VnGender::class, VnAge::class, WorldSummary::class, LastUpdate::class],
+        VnGender::class, VnAge::class, WorldSummary::class, LastUpdate::class, CountrySummary::class],
     version = 1
 )
 abstract class CovidDtb : RoomDatabase() {
@@ -20,6 +20,7 @@ abstract class CovidDtb : RoomDatabase() {
     abstract fun VnAgeDAO(): VnAgeDAO
     abstract fun WorldSummaryDAO(): WorldSummaryDAO
     abstract fun LastUpdateDAO(): LastUpdateDAO
+    abstract fun CountrySummaryDAO(): CountrySummaryDAO
 
     companion object {
         @Volatile

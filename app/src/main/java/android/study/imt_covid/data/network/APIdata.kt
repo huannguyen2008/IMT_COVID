@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit
 // https://imt-covid19.herokuapp.com/vietnam/api?key=summary
 // https://imt-covid19.herokuapp.com/vietnam/api?key=city_summary
 // https://imt-covid19.herokuapp.com/index/api?key=summary
+// https://imt-covid19.herokuapp.com/index/api?key=country_summary
 interface APIdata {
     @GET(value = "vietnam/api")
     fun getVnSummaryData(@Query(value = "key") key: String = "summary")
@@ -27,7 +28,9 @@ interface APIdata {
     @GET(value = "index/api")
     fun getWorldSummaryData(@Query(value = "key") key: String = "summary")
             : Deferred<WorldSummaryResponse>
-
+    @GET(value = "index/api")
+    fun getCountrySummaryData(@Query(value = "key") key: String="country_summary")
+            :Deferred<CountrySummaryResponse>
     @GET(value = "vietnam/api")
     fun getVnCityData(@Query(value = "key") key: String = "city_summary")
             : Deferred<VnCityResponse>
@@ -80,6 +83,8 @@ interface APIdata {
                 .registerTypeAdapter(VnGender::class.java, VnGenderTypeConverter())
                 .registerTypeAdapter(VnAge::class.java, VnAgeTypeConverter())
                 .registerTypeAdapter(WorldSummary::class.java, WorldSummaryTypeConverter())
+                .registerTypeAdapter(CountrySummary::class.java, CountrySummaryTypeConverter())
+
                 .create()
             return Retrofit.Builder()
                 .client(okHttpClient)

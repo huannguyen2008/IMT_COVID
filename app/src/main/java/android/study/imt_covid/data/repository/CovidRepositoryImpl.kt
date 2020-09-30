@@ -16,6 +16,7 @@ class CovidRepositoryImpl(
     private val VnAgeDAO: VnAgeDAO,
     private val WorldSummaryDAO: WorldSummaryDAO,
     private val LastUpdateDAO: LastUpdateDAO,
+    private val CountrySummaryDAO: CountrySummaryDAO,
     private val DataSource: DataSource
 ) : CovidRepository {
 
@@ -42,11 +43,14 @@ class CovidRepositoryImpl(
             downloadedLastUpdate.observeForever { newLastUpdate ->
                 persistFetchedLastUpdate(newLastUpdate)
             }
+            downloadedCountrySummary.observeForever { newCountrySummary ->
+                persistFetchedCountrySummary(newCountrySummary)
+            }
         }
     }
+
     private suspend fun initData() {
 //        if (isFetchNeeded(ZonedDateTime.now().minusHours(1)))
-
         fetchVnSummary()
         fetchWorldSummary()
         fetchVnCity()
@@ -54,77 +58,79 @@ class CovidRepositoryImpl(
         fetchVnGender()
         fetchVnAge()
         fetchLastUpdate()
+        fetchCountrySummary()
     }
+
+    // get data
     override suspend fun getVnSummary(VnSummary: VnSummary): LiveData<out VnSummary> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext VnSummaryDAO.getVnSummaryData()
         }
     }
+
     override suspend fun getWorldSummary(WorldSummary: WorldSummary): LiveData<out WorldSummary> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext WorldSummaryDAO.getWorldSummaryData()
         }
     }
+
     override suspend fun getVnCity(VnCity: List<VnCity>): LiveData<out List<VnCity>> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext VnCityDAO.getVnCityData()
         }
     }
 
     override suspend fun getVnNationality(VnNationality: List<VnNationality>): LiveData<out List<VnNationality>> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext VnNationalityDAO.getVnNationalityData()
         }
     }
 
     override suspend fun getVnGender(VnGender: VnGender): LiveData<out VnGender> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext VnGenderDAO.getVnGenderData()
         }
     }
 
     override suspend fun getVnAge(VnAge: List<VnAge>): LiveData<out List<VnAge>> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext VnAgeDAO.getVnAgeData()
         }
     }
+
     override suspend fun getLastUpdate(LastUpdate: LastUpdate): LiveData<out LastUpdate> {
         return withContext(Dispatchers.IO) {
-            async {
-                initData()
-            }
+            initData()
             return@withContext LastUpdateDAO.getLastUpdateData()
         }
     }
 
+    override suspend fun getCountrySummary(CountrySummary: List<CountrySummary>): LiveData<out List<CountrySummary>> {
+        return withContext(Dispatchers.IO) {
+            initData()
+            return@withContext CountrySummaryDAO.getCountrySummaryData()
+        }
+    }
+
+    // persist fetched data
     private fun persistFetchedVnSummary(fetchedVnSummary: VnSummaryResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             VnSummaryDAO.upsert(fetchedVnSummary.VnSummary)
         }
     }
+
     private fun persistFetchedWorldSummary(fetchedWorldSummary: WorldSummaryResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             WorldSummaryDAO.upsert(fetchedWorldSummary.WorldSummary)
         }
     }
+
     private fun persistFetchedVnCity(fetchedVnCity: VnCityResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             VnCityDAO.upsert(fetchedVnCity.VnCity)
@@ -148,13 +154,18 @@ class CovidRepositoryImpl(
             VnAgeDAO.upsert(fetchedVnAge.VnAge)
         }
     }
+
     private fun persistFetchedLastUpdate(fetchedLastUpdate: LastUpdateResponse) {
         GlobalScope.launch(Dispatchers.IO) {
             LastUpdateDAO.upsert(LastUpdate(fetchedLastUpdate.LastUpdate))
         }
     }
 
-
+    private fun persistFetchedCountrySummary(fetchedCountrySummary: CountrySummaryResponse) {
+        GlobalScope.launch(Dispatchers.IO) {
+            CountrySummaryDAO.upsert(fetchedCountrySummary.CountrySummary)
+        }
+    }
 
     private suspend fun fetchVnSummary() {
         val diff = 0
@@ -168,6 +179,7 @@ class CovidRepositoryImpl(
             VnSummary = VnSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
         )
     }
+
     private suspend fun fetchWorldSummary() {
         val diff = 0
         val recover = 0
@@ -177,8 +189,29 @@ class CovidRepositoryImpl(
         val newCases = 0
         val newDeath = 0
         DataSource.fetchWorldSummary(
-            WorldSummary = WorldSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
+            WorldSummary = WorldSummary(
+                diff,
+                recover,
+                totalDeath,
+                active,
+                total,
+                newCases,
+                newDeath
+            )
         )
+    }
+
+    private suspend fun fetchCountrySummary() {
+        val countryRegion = "nothing"
+        val total = 0
+        val death = 0
+        val active = 0
+        val recovered = 0
+        val newCases = 0
+        val newDeath = 0
+        val listCountrySummary =
+            listOf(CountrySummary(countryRegion, total, death, active, recovered, newCases, newDeath))
+        DataSource.fetchCountrySummary(listCountrySummary)
     }
 
     private suspend fun fetchVnCity() {
@@ -214,6 +247,7 @@ class CovidRepositoryImpl(
         val listAge = listOf(VnAge(patient, age))
         DataSource.fetchVnAge(listAge)
     }
+
     private suspend fun fetchLastUpdate() {
         val lastUpdate = "nothing"
         DataSource.fetchLastUpdate(LastUpdate(lastUpdate))
