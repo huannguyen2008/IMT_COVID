@@ -8,9 +8,10 @@
     <string name="information">Information</string>
 
     <string name="covid_19_dashboard">COVID-19 Dashboard</string>
-    <string name="vietnam_summary">Vietnam Summary</string>
-
-    <string name="summary_worldwide">Summary Worldwide</string>
+    <string-array name="summary_title">
+        <item name="vietnam_summary">Vietnam Summary</item>
+        <item name="world_summary">Summary Worldwide</item>
+    </string-array>
     <string name="last_update_at_today">Last update at today</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
     <string name="city_provinces">City/Provinces</string>

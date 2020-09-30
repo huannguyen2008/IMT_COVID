@@ -44,6 +44,10 @@ interface APIdata {
     fun getVnAgeData(@Query(value = "key") key: String = "age")
             : Deferred<VnAgeResponse>
 
+    @GET(value = "last_update")
+    fun getLastUpdateData(@Query(value = "last_update") LastUpdate: LastUpdate)
+            : Deferred<LastUpdateResponse>
+
     companion object {
         operator fun invoke(
             connectivityInterceptor: ConnectivityInterceptor

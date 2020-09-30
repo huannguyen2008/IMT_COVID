@@ -15,6 +15,7 @@ class CovidRepositoryImpl(
     private val VnGenderDAO: VnGenderDAO,
     private val VnAgeDAO: VnAgeDAO,
     private val WorldSummaryDAO: WorldSummaryDAO,
+    private val LastUpdateDAO: LastUpdateDAO,
     private val DataSource: DataSource
 ) : CovidRepository {
 
@@ -38,9 +39,22 @@ class CovidRepositoryImpl(
             downloadedWorldSummary.observeForever { newWorldSummary ->
                 persistFetchedWorldSummary(newWorldSummary)
             }
+            downloadedLastUpdate.observeForever { newLastUpdate ->
+                persistFetchedLastUpdate(newLastUpdate)
+            }
         }
     }
+    private suspend fun initData() {
+//        if (isFetchNeeded(ZonedDateTime.now().minusHours(1)))
 
+        fetchVnSummary()
+        fetchWorldSummary()
+        fetchVnCity()
+        fetchVnNationality()
+        fetchVnGender()
+        fetchVnAge()
+        fetchLastUpdate()
+    }
     override suspend fun getVnSummary(VnSummary: VnSummary): LiveData<out VnSummary> {
         return withContext(Dispatchers.IO) {
             async {
@@ -92,6 +106,14 @@ class CovidRepositoryImpl(
             return@withContext VnAgeDAO.getVnAgeData()
         }
     }
+    override suspend fun getLastUpdate(LastUpdate: LastUpdate): LiveData<out LastUpdate> {
+        return withContext(Dispatchers.IO) {
+            async {
+                initData()
+            }
+            return@withContext LastUpdateDAO.getLastUpdateData()
+        }
+    }
 
     private fun persistFetchedVnSummary(fetchedVnSummary: VnSummaryResponse) {
         GlobalScope.launch(Dispatchers.IO) {
@@ -126,15 +148,13 @@ class CovidRepositoryImpl(
             VnAgeDAO.upsert(fetchedVnAge.VnAge)
         }
     }
-
-    private suspend fun initData() {
-            fetchVnSummary()
-            fetchWorldSummary()
-            fetchVnCity()
-//            fetchVnNationality()
-            fetchVnGender()
-            fetchVnAge()
+    private fun persistFetchedLastUpdate(fetchedLastUpdate: LastUpdateResponse) {
+        GlobalScope.launch(Dispatchers.IO) {
+            LastUpdateDAO.upsert(LastUpdate(fetchedLastUpdate.LastUpdate))
+        }
     }
+
+
 
     private suspend fun fetchVnSummary() {
         val diff = 0
@@ -194,10 +214,14 @@ class CovidRepositoryImpl(
         val listAge = listOf(VnAge(patient, age))
         DataSource.fetchVnAge(listAge)
     }
+    private suspend fun fetchLastUpdate() {
+        val lastUpdate = "nothing"
+        DataSource.fetchLastUpdate(LastUpdate(lastUpdate))
+    }
 
-//    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
-//        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(1440)
-//        return lastFetchTime.isBefore(thirtyMinAgo)
-//    }
+    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
+        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(1000)
+        return lastFetchTime.isBefore(thirtyMinAgo)
+    }
 
 }

@@ -10,6 +10,7 @@ interface CovidRepository {
     suspend fun getVnGender(VnGender: VnGender): LiveData<out VnGender>
     suspend fun getVnAge(VnAge: List<VnAge>): LiveData<out List<VnAge>>
     suspend fun getWorldSummary(WorldSummary: WorldSummary): LiveData<out WorldSummary>
+    suspend fun getLastUpdate(LastUpdate: LastUpdate): LiveData<out LastUpdate>
 
 
 }

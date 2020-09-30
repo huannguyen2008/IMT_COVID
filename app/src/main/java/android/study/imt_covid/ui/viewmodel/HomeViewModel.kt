@@ -1,5 +1,6 @@
 package android.study.imt_covid.viewmodel
 
+import android.study.imt_covid.data.dataClass.entity.LastUpdate
 import android.study.imt_covid.data.dataClass.entity.VnCity
 import android.study.imt_covid.data.dataClass.entity.VnSummary
 import android.study.imt_covid.data.dataClass.entity.WorldSummary
@@ -66,5 +67,9 @@ class HomeViewModel(
                 )
             )
         )
+    }
+    val lastUpdate by lazyDeferred {
+        val lastUpdate = "nothing"
+        CovidRepository.getLastUpdate(LastUpdate(lastUpdate))
     }
 }

@@ -114,4 +114,21 @@ class DataSourceImpl(
             Log.e("Connectivity","No internet connection!",e)
         }
     }
+    // get last update
+    private val _downloadedLastUpdate = MutableLiveData<LastUpdateResponse>()
+    override val downloadedLastUpdate: LiveData<LastUpdateResponse>
+        get() = _downloadedLastUpdate
+
+
+    override suspend fun fetchLastUpdate(LastUpdate: LastUpdate) {
+        try {
+            val fetchedLastUpdate = APIdata
+                .getLastUpdateData(LastUpdate)
+                .await()
+            _downloadedLastUpdate.postValue(fetchedLastUpdate)
+        }
+        catch (e: NoConnectivityException){
+            Log.e("Connectivity","No internet connection!",e)
+        }
+    }
 }

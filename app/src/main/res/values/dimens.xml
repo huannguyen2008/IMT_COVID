@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="caption">25sp</dimen>
-    <dimen name="normal_text">15sp</dimen>
+    <dimen name="normal_text">13sp</dimen>
     <dimen name="padding_left">10dp</dimen>
 
 </resources>

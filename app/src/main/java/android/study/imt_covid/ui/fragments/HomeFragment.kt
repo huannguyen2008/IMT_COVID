@@ -9,6 +9,8 @@ import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInf
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.viewmodel.HomeViewModel
 import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -38,12 +40,52 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val viewModelFactory: HomeViewModelFactory by instance()
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HomeViewModel::class.java)
-        bindUI()
-        detail_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.chartFragment, null))
 
+        // move to chart fragment
+        detail_button.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.chartFragment,
+                null
+            )
+        )
+//        bindUIVn()
+//        bindUIWorld()
+        bindLastUpdate()
+        // spinner title
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.summary_title,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            summary_title_spinner.adapter = adapter
+        }
+        summary_title_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (summary_title_spinner.selectedItemPosition == 0){
+                    bindUIVn()
+                }
+                else{
+                    bindUIWorld()
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
     }
 
-    private fun bindUI() = launch {
+    private fun bindUIVn() = launch {
         val vnSum = viewModel.vnSummary.await()
         vnSum.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
@@ -57,13 +99,26 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             if (it == null) return@Observer
             initRecycleView(it.toVnCityItem())
         })
+
+    }
+    private fun bindUIWorld() = launch {
         val vnWorld = viewModel.worldSummary.await()
         vnWorld.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            note_vietnam.text = it.toString()
+            updateTotal(it.total, it.newCases)
+            updateActive(it.active)
+            updateRecovered(it.recover)
+            updateDeath(it.totalDeath, it.newDeath)
+        })
+
+    }
+    private fun bindLastUpdate() = launch {
+        val lastUpdate = viewModel.lastUpdate.await()
+        lastUpdate.observe(viewLifecycleOwner, Observer {
+            if (it == null) return@Observer
+            time_update.text = it.toString()
         })
     }
-
     private fun updateTotal(total: Int, newCases: Int) {
         total_cases_number.text = ("$total + $newCases↑")
     }
