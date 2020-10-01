@@ -1,8 +1,8 @@
-package android.study.imt_covid.data.network.networkSource
+package android.study.imt_covid.network.networkSource
 
 import android.study.imt_covid.data.dataClass.entity.*
 import android.study.imt_covid.data.dataClass.response.*
-import android.study.imt_covid.data.network.APIdata
+import android.study.imt_covid.network.APIdata
 import android.study.imt_covid.internal.NoConnectivityException
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -22,7 +22,6 @@ class DataSourceImpl(
         try {
             val fetchedVnSummary = APIdata
                 .getVnSummaryData()
-                .await()
             _downloadedVnSummary.postValue(fetchedVnSummary)
         }
         catch (e: NoConnectivityException){
@@ -39,7 +38,6 @@ class DataSourceImpl(
         try {
             val fetchedWorldSummary = APIdata
                 .getWorldSummaryData()
-                .await()
             _downloadedWorldSummary.postValue(fetchedWorldSummary)
         }
         catch (e: NoConnectivityException){
@@ -56,7 +54,6 @@ class DataSourceImpl(
         try {
             val fetchedVnCity = APIdata
                 .getVnCityData()
-                .await()
             _downloadedVnCity.postValue(fetchedVnCity)
         }
         catch (e: NoConnectivityException){
@@ -73,7 +70,6 @@ class DataSourceImpl(
         try {
             val fetchedVnNationality = APIdata
                 .getVnNationalityData()
-                .await()
             _downloadedVnNationality.postValue(fetchedVnNationality)
         }
         catch (e: NoConnectivityException){
@@ -90,7 +86,6 @@ class DataSourceImpl(
         try {
             val fetchedVnGender = APIdata
                 .getVnGenderData()
-                .await()
             _downloadedVnGender.postValue(fetchedVnGender)
         }
         catch (e: NoConnectivityException){
@@ -107,7 +102,6 @@ class DataSourceImpl(
         try {
             val fetchedVnAge = APIdata
                 .getVnAgeData()
-                .await()
             _downloadedVnAge.postValue(fetchedVnAge)
         }
         catch (e: NoConnectivityException){
@@ -124,7 +118,6 @@ class DataSourceImpl(
         try {
             val fetchedLastUpdate = APIdata
                 .getLastUpdateData(LastUpdate)
-                .await()
             _downloadedLastUpdate.postValue(fetchedLastUpdate)
         }
         catch (e: NoConnectivityException){
@@ -141,7 +134,6 @@ class DataSourceImpl(
         try {
             val fetchedLastUpdate = APIdata
                 .getCountrySummaryData()
-                .await()
             _downloadedCountrySummary.postValue(fetchedLastUpdate)
         }
         catch (e: NoConnectivityException){

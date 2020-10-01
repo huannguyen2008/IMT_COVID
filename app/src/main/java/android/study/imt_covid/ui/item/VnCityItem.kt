@@ -1,13 +1,13 @@
-package android.study.imt_covid.ui.fragments
+package android.study.imt_covid.ui.item
 
 import android.study.imt_covid.R
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
+import android.study.imt_covid.data.dataClass.entity.VnCity
 import com.xwray.groupie.kotlinandroidextensions.Item
 import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.vn_city_item.*
 
 class VnCityItem(
-    val VnCity: UnitSpecifyVnCityInfo
+    val VnCity: VnCity
 ) : Item() {
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.apply {

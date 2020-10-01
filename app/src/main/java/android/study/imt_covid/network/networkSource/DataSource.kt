@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.network.networkSource
+package android.study.imt_covid.network.networkSource
 
 import android.study.imt_covid.data.dataClass.entity.*
 import android.study.imt_covid.data.dataClass.response.*

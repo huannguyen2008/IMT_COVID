@@ -1,9 +1,10 @@
 package android.study.imt_covid.viewmodel
 
 import android.study.imt_covid.data.dataClass.entity.*
-import android.study.imt_covid.data.repository.CovidRepository
+import android.study.imt_covid.repository.CovidRepository
 import android.study.imt_covid.internal.lazyDeferred
 import androidx.lifecycle.ViewModel
+import java.text.DecimalFormat
 
 
 class HomeViewModel(
@@ -91,4 +92,5 @@ class HomeViewModel(
         val lastUpdate = "nothing"
         CovidRepository.getLastUpdate(LastUpdate(lastUpdate))
     }
+
 }

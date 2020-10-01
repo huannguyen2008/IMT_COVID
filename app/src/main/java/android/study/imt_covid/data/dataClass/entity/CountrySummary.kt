@@ -1,22 +1,22 @@
 package android.study.imt_covid.data.dataClass.entity
 
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyCountrySummaryInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
+
 @Entity(tableName = "country_summary")
 data class CountrySummary(
     @PrimaryKey(autoGenerate = false)
-    override val countryRegion: String,
-    override val total: Int,
-    override val death: Int,
-    override val active: Int,
-    override val recovered: Int,
-    override val newCases: Int,
-    override val newDeath: Int
-): UnitSpecifyCountrySummaryInfo
+    val countryRegion: String,
+    val total: Int,
+    val death: Int,
+    val active: Int,
+    val recovered: Int,
+    val newCases: Int,
+    val newDeath: Int
+)
 
 // convert json file List<List<Any>>
 class CountrySummaryTypeConverter : TypeAdapter<CountrySummary>() {

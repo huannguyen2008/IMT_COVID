@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.network.Interceptor
+package android.study.imt_covid.network.interceptor
 
 import okhttp3.Interceptor
 

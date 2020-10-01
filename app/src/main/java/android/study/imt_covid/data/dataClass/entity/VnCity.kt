@@ -1,6 +1,5 @@
 package android.study.imt_covid.data.dataClass.entity
 
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter
@@ -11,13 +10,13 @@ import com.google.gson.stream.JsonWriter
 @Entity(tableName = "vn_city")
 data class VnCity(
     @PrimaryKey(autoGenerate = false)
-    override val city: String,
-    override val totalCity: Int,
-    override val activeCity: Int,
-    override val recoveredCity: Int,
-    override val deathCity: Int,
-    override val diffCity: Int
-) : UnitSpecifyVnCityInfo
+    val city: String,
+    val totalCity: Int,
+    val activeCity: Int,
+    val recoveredCity: Int,
+    val deathCity: Int,
+    val diffCity: Int
+)
 
 // convert json file List<List<Any>>
 class VnCityTypeConverter : TypeAdapter<VnCity>() {

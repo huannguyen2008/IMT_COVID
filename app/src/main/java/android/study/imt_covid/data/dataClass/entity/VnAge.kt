@@ -1,6 +1,5 @@
 package android.study.imt_covid.data.dataClass.entity
 
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnAgeInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter
@@ -10,9 +9,9 @@ import com.google.gson.stream.JsonWriter
 @Entity(tableName = "age")
 data class VnAge(
     @PrimaryKey(autoGenerate = false)
-    override val patient: String,
-    override val age: Int
-): UnitSpecifyVnAgeInfo
+    val patient: String,
+    val age: Int
+)
 
 // convert json file List<List<Any>>
 class VnAgeTypeConverter : TypeAdapter<VnAge>() {

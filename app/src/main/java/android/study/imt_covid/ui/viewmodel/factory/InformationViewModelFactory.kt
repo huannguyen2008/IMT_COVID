@@ -1,6 +1,6 @@
 package android.study.imt_covid.ui.viewmodel.factory
 
-import android.study.imt_covid.data.repository.CovidRepository
+import android.study.imt_covid.repository.CovidRepository
 import android.study.imt_covid.ui.viewmodel.InformationViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

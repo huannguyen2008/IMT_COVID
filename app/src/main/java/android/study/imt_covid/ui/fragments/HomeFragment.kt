@@ -1,16 +1,17 @@
 package android.study.imt_covid.ui.fragments
 
 import android.os.Bundle
+import android.study.imt_covid.R
+import android.study.imt_covid.data.dataClass.entity.CountrySummary
+import android.study.imt_covid.data.dataClass.entity.VnCity
+import android.study.imt_covid.ui.base.ScopedFragment
+import android.study.imt_covid.ui.item.VnCityItem
+import android.study.imt_covid.ui.item.WorldCountryItem
+import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
+import android.study.imt_covid.viewmodel.HomeViewModel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.study.imt_covid.R
-import android.study.imt_covid.data.dataClass.entity.CountrySummary
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyCountrySummaryInfo
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnCityInfo
-import android.study.imt_covid.ui.base.ScopedFragment
-import android.study.imt_covid.viewmodel.HomeViewModel
-import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
@@ -26,6 +27,7 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
+import java.text.DecimalFormat
 
 
 class HomeFragment : ScopedFragment(), KodeinAware {
@@ -47,7 +49,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             .get(HomeViewModel::class.java)
 
         // move to chart fragment
-        detail_button.setOnClickListener(
+        see_more.setOnClickListener(
             Navigation.createNavigateOnClickListener(
                 R.id.chartFragment,
                 null
@@ -80,10 +82,13 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 if (summary_title_spinner.selectedItemPosition == 0) {
                     bindUIVn()
                     city_or_country.text = getString(R.string.city_provinces)
+                    note_vietnam.text = getString(R.string.note_vn)
+                    cases_table_title.text = getString(R.string.cases_city_title)
                 } else {
                     bindUIWorld()
                     city_or_country.text = getString(R.string.country_region)
                     note_vietnam.text = null
+                    cases_table_title.text = getString(R.string.cases_country_title)
                 }
             }
 
@@ -97,10 +102,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val vnSum = viewModel.vnSummary.await()
         vnSum.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
-            updateTotal(it.total, it.newCases)
-            updateActive(it.active)
-            updateRecovered(it.recover)
-            updateDeath(it.totalDeath, it.newDeath)
+            total_cases_number.text = it.total.toString()
+            active_cases_number.text = it.active.toString()
+            recovered_cases_number.text = it.recover.toString()
+            death_cases_number.text = it.totalDeath.toString()
+
         })
         val vnCity = viewModel.vnCity.await()
         vnCity.observe(viewLifecycleOwner, Observer {
@@ -137,23 +143,23 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateTotal(total: Int, newCases: Int) {
-        total_cases_number.text = ("$total + $newCases↑")
+        total_cases_number.text = ("${formatValue(total.toFloat())} + ${formatValue(newCases.toFloat())}↑")
     }
 
     private fun updateActive(active: Int) {
-        active_cases_number.text = active.toString()
+        active_cases_number.text = formatValue(active.toFloat()).toString()
     }
 
     private fun updateRecovered(recovered: Int) {
-        recovered_cases_number.text = recovered.toString()
+        recovered_cases_number.text = formatValue(recovered.toFloat()).toString()
     }
 
     private fun updateDeath(death: Int, newDeath: Int) {
-        death_cases_number.text = ("$death + $newDeath↑")
+        death_cases_number.text = ("${formatValue(death.toFloat())} + ${formatValue(newDeath.toFloat())}↑")
     }
 
     // parse vn city to recycle view
-    private fun List<UnitSpecifyVnCityInfo>.toVnCityItem(): List<VnCityItem> {
+    private fun List<VnCity>.toVnCityItem(): List<VnCityItem> {
         return this.map {
             VnCityItem(it)
         }
@@ -169,7 +175,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         }
     }
     // parse world country to recycle view
-    private fun List<UnitSpecifyCountrySummaryInfo>.toCountryItem(): List<WorldCountryItem> {
+    private fun List<CountrySummary>.toCountryItem(): List<WorldCountryItem> {
         return this.map {
             WorldCountryItem(it)
         }
@@ -183,5 +189,16 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)
             adapter = groupAdapter
         }
+    }
+    private fun formatValue(value: Float): String? {
+        var value = value
+        val arr = arrayOf("", "K", "M", "B", "T", "P", "E")
+        var index = 0
+        while (value / 1000 >= 1) {
+            value /= 1000
+            index++
+        }
+        val decimalFormat = DecimalFormat("#.##")
+        return java.lang.String.format("%s %s", decimalFormat.format(value), arr[index])
     }
 }

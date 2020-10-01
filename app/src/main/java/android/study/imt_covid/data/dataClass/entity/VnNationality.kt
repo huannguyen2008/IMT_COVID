@@ -1,6 +1,5 @@
 package android.study.imt_covid.data.dataClass.entity
 
-import android.study.imt_covid.data.dataClass.unitlocalized.UnitSpecifyVnNationalityInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.TypeAdapter
@@ -11,9 +10,9 @@ import com.google.gson.stream.JsonWriter
 @Entity(tableName = "nationality")
 data class VnNationality(
     @PrimaryKey(autoGenerate = false)
-    override val nationality: String,
-    override val numberCases: Int
-): UnitSpecifyVnNationalityInfo
+    val nationality: String,
+    val numberCases: Int
+)
 
 // convert json file List<List<Any>>
 class VnNationalityTypeConverter : TypeAdapter<VnNationality>() {

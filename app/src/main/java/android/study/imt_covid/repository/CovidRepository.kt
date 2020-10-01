@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.repository
+package android.study.imt_covid.repository
 
 import android.study.imt_covid.data.dataClass.entity.*
 import androidx.lifecycle.LiveData

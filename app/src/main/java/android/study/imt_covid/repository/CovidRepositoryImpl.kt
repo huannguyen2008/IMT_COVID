@@ -1,8 +1,8 @@
-package android.study.imt_covid.data.repository
+package android.study.imt_covid.repository
 
 import android.study.imt_covid.data.dataClass.entity.*
 import android.study.imt_covid.data.dataClass.response.*
-import android.study.imt_covid.data.network.networkSource.DataSource
+import android.study.imt_covid.network.networkSource.DataSource
 import android.study.imt_covid.data.dtbAndDAO.*
 import androidx.lifecycle.LiveData
 import kotlinx.coroutines.*

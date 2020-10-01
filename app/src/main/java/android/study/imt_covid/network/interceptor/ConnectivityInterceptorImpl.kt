@@ -1,4 +1,4 @@
-package android.study.imt_covid.data.network.Interceptor
+package android.study.imt_covid.network.interceptor
 
 import android.content.Context
 import android.net.ConnectivityManager

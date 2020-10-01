@@ -2,13 +2,13 @@ package android.study.imt_covid
 
 import android.app.Application
 import android.study.imt_covid.data.dtbAndDAO.CovidDtb
-import android.study.imt_covid.data.network.APIdata
-import android.study.imt_covid.data.network.networkSource.DataSource
-import android.study.imt_covid.data.network.networkSource.DataSourceImpl
-import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptor
-import android.study.imt_covid.data.network.Interceptor.ConnectivityInterceptorImpl
-import android.study.imt_covid.data.repository.CovidRepository
-import android.study.imt_covid.data.repository.CovidRepositoryImpl
+import android.study.imt_covid.network.APIdata
+import android.study.imt_covid.network.networkSource.DataSource
+import android.study.imt_covid.network.networkSource.DataSourceImpl
+import android.study.imt_covid.network.interceptor.ConnectivityInterceptor
+import android.study.imt_covid.network.interceptor.ConnectivityInterceptorImpl
+import android.study.imt_covid.repository.CovidRepository
+import android.study.imt_covid.repository.CovidRepositoryImpl
 import android.study.imt_covid.ui.viewmodel.factory.ChartViewModelFactory
 import android.study.imt_covid.ui.viewmodel.factory.HomeViewModelFactory
 import android.study.imt_covid.ui.viewmodel.factory.InformationViewModelFactory

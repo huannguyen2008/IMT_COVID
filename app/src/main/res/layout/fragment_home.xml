@@ -10,6 +10,7 @@
         android:background="@color/extraExtraLightGray">
 
         <TextView
+            android:focusable="true"
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,16 +34,16 @@
             app:layout_constraintTop_toBottomOf="@id/title" />
 
 
-        <Button
-            android:id="@+id/detail_button"
+        <TextView
+            android:paddingBottom="@dimen/padding_left"
+            android:id="@+id/see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="30dp"
             android:backgroundTint="@color/white"
-            android:text="@string/detail"
-            android:textColor="@color/black"
+            android:text="@string/see_more"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/summary_title_spinner" />
+            app:layout_constraintBottom_toTopOf="@id/active_cases" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/total_cases"
@@ -223,12 +224,12 @@
             android:textColor="@color/black"
             android:textSize="@dimen/normal_text"
             android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@id/cases_city_title"
+            app:layout_constraintBottom_toTopOf="@id/cases_table_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/recovered_cases" />
 
         <TextView
-            android:id="@+id/cases_city_title"
+            android:id="@+id/cases_table_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_left"
@@ -247,8 +248,8 @@
             android:layout_marginEnd="@dimen/padding_left"
             android:background="@drawable/table_border"
             android:backgroundTint="@color/lightGray"
-            app:layout_constraintStart_toStartOf="@id/cases_city_title"
-            app:layout_constraintTop_toBottomOf="@id/cases_city_title">
+            app:layout_constraintStart_toStartOf="@id/cases_table_title"
+            app:layout_constraintTop_toBottomOf="@id/cases_table_title">
 
             <LinearLayout
                 android:layout_width="match_parent"
