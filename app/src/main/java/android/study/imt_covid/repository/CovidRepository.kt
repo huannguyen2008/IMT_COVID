@@ -4,6 +4,7 @@ import android.study.imt_covid.data.dataClass.entity.*
 import androidx.lifecycle.LiveData
 
 interface CovidRepository {
+    suspend fun initData()
     suspend fun getVnSummary(VnSummary: VnSummary): LiveData<out VnSummary>
     suspend fun getVnCity(VnCity: List<VnCity>): LiveData<out List<VnCity>>
     suspend fun getVnNationality(VnNationality: List<VnNationality>): LiveData<out List<VnNationality>>

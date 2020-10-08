@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<!--    <color-array name="gender">-->
+<!--        <color name="male">#F3B4C3</color>-->
+<!--        <color name="female">#36D8FF</color>-->
+<!--    </color-array>-->
+
     <color name="colorPrimary">#1DA1F2</color>
     <color name="colorPrimaryVariant">#36D8FF</color>
     <color name="white">#FFFFFF</color>

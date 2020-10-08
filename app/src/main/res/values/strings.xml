@@ -24,12 +24,34 @@
     <string name="Default_number">0</string>
     <string name="default_plus">+0</string>
     <string name="note_vn">Note that T is different than A+D+R, this is because a classification changes, for more detail see https://ncov.moh.gov.vn/</string>
-    <string name="gov_link"> <a href="https://ncov.moh.gov.vn/">TRANG TIN VỀ DỊCH BỆNH VIÊM ĐƯỜNG HÔ HẤP CẤP COVID-19</a> </string>
-    <string name="worldometer_link"> <a href="https://www.worldometers.info/coronavirus/">COVID-19 CORONAVIRUS PANDEMIC</a></string>
-    <string name="jhu_link"> <a href="https://coronavirus.jhu.edu/map.html">COVID-19 Dashboard by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)</a></string>
-    <string name="ecdc_link"> <a href="https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases">European Centre for Disease Prevention and Control</a></string>
-    <string name="symptoms">"Symptoms "</string>
+    <string name="gov_link"><a href="https://ncov.moh.gov.vn/">The Ministry of Health of Vietnam website</a> </string>
+    <string name="who_link"><a href="https://covid19.who.int/">WHO Coronavirus Disease(COVID-19) Dashboard</a></string>
+    <string name="jhu_link"><a href="https://coronavirus.jhu.edu/map.html">COVID-19 Dashboard by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)</a></string>
+    <string name="ecdc_link"><a href="https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases">European Centre for Disease Prevention and Control</a></string>
+    <string name="fb_link"><a href="https://www.facebook.com/thongtinchinhphu">Information from Vietnam Government</a> </string>
+    <string name="symptoms">Symptoms</string>
     <string name="assistance">Assistance</string>
     <string name="cases_country_title">Cases by Country/Region</string>
     <string name="see_more"><u>See more charts</u></string>
+    <string name="number_of_cases_by_gender">NUMBER OF CASES BY GENDER</string>
+    <string name="number_of_cases_by_nationality">NUMBER OF CASES BY NATIONALITY</string>
+    <string name="symptoms_des">It usually takes 2–14 days to the symptoms appear on the infected patient. In some specific cases, symptoms appear after 28 days since the patient is infected. According to WHO, the common COVID-19 symptoms are:</string>
+    <string name="list">
+    <ul>
+        <li>Fever or chills</li>\n
+        <li>Cough</li>\n
+        <li>Fatigue</li>\n
+        <li>Shortness of breath or difficulty breathing</li>\n
+        <li>Muscle or body aches</li>\n
+        <li>New loss of taste or smell</li>\n
+        <li>Sore throat</li>\n
+        <li>Congestion or runny nose</li>\n
+        <li>Nausea or vomiting</li>\n
+        <li>Headache</li>\n
+        <li>Diarrhea</li>
+    </ul>
+    </string>
+    <string name="hotline">Vietnam\'s hotline: 19009095</string>
+    <string name="hospital"> <a href="http://vncdc.gov.vn/vi/phong-chong-dich-benh-viem-phoi-cap-ncov/14013/danh-sach-cac-don-vi-da-duoc-bo-y-te-cho-phep-thuc-hien-xet-nghiem-khang-dinh-covid-19-cap-nhat-den-ngay-10-8-2020">List of hospital in Vietnam where can test for COVID-19
+</a> </string>
 </resources>

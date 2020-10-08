@@ -1,64 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.InformationFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_left"
-        android:text="@string/references"
-        android:textSize="@dimen/caption"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        tools:context=".ui.fragments.InformationFragment">
 
-    <TextView
-        android:id="@+id/gov_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/caption"
-        android:padding="5dp"
-        android:text="@string/gov_link" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:text="@string/references"
+            android:textSize="@dimen/caption"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/worldometer_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/caption"
-        android:padding="5dp"
-        android:text="@string/worldometer_link" />
+        <TextView
+            android:id="@+id/gov_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/gov_link" />
 
-    <TextView
-        android:id="@+id/jhu_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/caption"
-        android:padding="5dp"
-        android:text="@string/jhu_link" />
+        <TextView
+            android:id="@+id/who_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/who_link" />
 
-    <TextView
-        android:id="@+id/ecdc_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/caption"
-        android:padding="5dp"
-        android:text="@string/ecdc_link" />
+        <TextView
+            android:id="@+id/jhu_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/jhu_link" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_left"
-        android:text="@string/symptoms"
-        android:textSize="@dimen/caption"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/ecdc_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/ecdc_link" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_left"
-        android:text="@string/assistance"
-        android:textSize="@dimen/caption"
-        android:textStyle="bold" />
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:text="@string/symptoms"
+            android:textSize="@dimen/caption"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/symptoms_des"
+            android:textSize="@dimen/normal_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/list"
+            android:textSize="@dimen/normal_text" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:text="@string/assistance"
+            android:textSize="@dimen/caption"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/fb_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/fb_link" />
+        <TextView
+            android:id="@+id/list_hospital"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/hospital" />
+        <TextView
+            android:id="@+id/hotline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/hotline" />
+    </LinearLayout>
+</ScrollView>

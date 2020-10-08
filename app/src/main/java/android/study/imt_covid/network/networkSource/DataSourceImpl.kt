@@ -2,14 +2,14 @@ package android.study.imt_covid.network.networkSource
 
 import android.study.imt_covid.data.dataClass.entity.*
 import android.study.imt_covid.data.dataClass.response.*
-import android.study.imt_covid.network.APIdata
+import android.study.imt_covid.network.ApiService
 import android.study.imt_covid.internal.NoConnectivityException
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
 class DataSourceImpl(
-    private val APIdata: APIdata
+    private val ApiService: ApiService
 ) : DataSource {
 
     // get VN summary
@@ -20,7 +20,7 @@ class DataSourceImpl(
 
     override suspend fun fetchVnSummary(VnSummary: VnSummary) {
         try {
-            val fetchedVnSummary = APIdata
+            val fetchedVnSummary = ApiService
                 .getVnSummaryData()
             _downloadedVnSummary.postValue(fetchedVnSummary)
         }
@@ -28,7 +28,7 @@ class DataSourceImpl(
             Log.e("Connectivity","No internet connection!",e)
         }
     }
-    // get VN summary
+    // get world summary
     private val _downloadedWorldSummary = MutableLiveData<WorldSummaryResponse>()
     override val downloadedWorldSummary: LiveData<WorldSummaryResponse>
         get() = _downloadedWorldSummary
@@ -36,7 +36,7 @@ class DataSourceImpl(
 
     override suspend fun fetchWorldSummary(WorldSummary: WorldSummary) {
         try {
-            val fetchedWorldSummary = APIdata
+            val fetchedWorldSummary = ApiService
                 .getWorldSummaryData()
             _downloadedWorldSummary.postValue(fetchedWorldSummary)
         }
@@ -52,7 +52,7 @@ class DataSourceImpl(
 
     override suspend fun fetchVnCity(VnCity: List<VnCity>) {
         try {
-            val fetchedVnCity = APIdata
+            val fetchedVnCity = ApiService
                 .getVnCityData()
             _downloadedVnCity.postValue(fetchedVnCity)
         }
@@ -68,7 +68,7 @@ class DataSourceImpl(
 
     override suspend fun fetchVnNationality(VnNationality: List<VnNationality>) {
         try {
-            val fetchedVnNationality = APIdata
+            val fetchedVnNationality = ApiService
                 .getVnNationalityData()
             _downloadedVnNationality.postValue(fetchedVnNationality)
         }
@@ -84,7 +84,7 @@ class DataSourceImpl(
 
     override suspend fun fetchVnGender(VnGender: VnGender) {
         try {
-            val fetchedVnGender = APIdata
+            val fetchedVnGender = ApiService
                 .getVnGenderData()
             _downloadedVnGender.postValue(fetchedVnGender)
         }
@@ -100,7 +100,7 @@ class DataSourceImpl(
 
     override suspend fun fetchVnAge(VnAge: List<VnAge>) {
         try {
-            val fetchedVnAge = APIdata
+            val fetchedVnAge = ApiService
                 .getVnAgeData()
             _downloadedVnAge.postValue(fetchedVnAge)
         }
@@ -116,7 +116,7 @@ class DataSourceImpl(
 
     override suspend fun fetchLastUpdate(LastUpdate: LastUpdate) {
         try {
-            val fetchedLastUpdate = APIdata
+            val fetchedLastUpdate = ApiService
                 .getLastUpdateData(LastUpdate)
             _downloadedLastUpdate.postValue(fetchedLastUpdate)
         }
@@ -132,7 +132,7 @@ class DataSourceImpl(
 
     override suspend fun fetchCountrySummary(CountrySummary: List<CountrySummary>) {
         try {
-            val fetchedLastUpdate = APIdata
+            val fetchedLastUpdate = ApiService
                 .getCountrySummaryData()
             _downloadedCountrySummary.postValue(fetchedLastUpdate)
         }

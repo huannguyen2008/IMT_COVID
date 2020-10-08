@@ -9,7 +9,7 @@ import kotlinx.coroutines.*
 import org.threeten.bp.ZonedDateTime
 
 class CovidRepositoryImpl(
-    val VnSummaryDAO: VnSummaryDAO,
+    private val VnSummaryDAO: VnSummaryDAO,
     private val VnCityDAO: VnCityDAO,
     private val VnNationalityDAO: VnNationalityDAO,
     private val VnGenderDAO: VnGenderDAO,
@@ -49,71 +49,62 @@ class CovidRepositoryImpl(
         }
     }
 
-    private suspend fun initData() {
-//        if (isFetchNeeded(ZonedDateTime.now().minusHours(1)))
-        fetchVnSummary()
-        fetchWorldSummary()
-        fetchVnCity()
-        fetchVnNationality()
-        fetchVnGender()
-        fetchVnAge()
-        fetchLastUpdate()
-        fetchCountrySummary()
+    override suspend fun initData() {
+        if (isFetchNeeded(ZonedDateTime.now().minusHours(1)))
+            fetchVnSummary()
+            fetchWorldSummary()
+            fetchVnCity()
+            fetchVnNationality()
+            fetchVnGender()
+            fetchVnAge()
+            fetchLastUpdate()
+            fetchCountrySummary()
     }
-
-    // get data
+    // get data in Room with DAO
     override suspend fun getVnSummary(VnSummary: VnSummary): LiveData<out VnSummary> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext VnSummaryDAO.getVnSummaryData()
         }
     }
 
     override suspend fun getWorldSummary(WorldSummary: WorldSummary): LiveData<out WorldSummary> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext WorldSummaryDAO.getWorldSummaryData()
         }
     }
 
     override suspend fun getVnCity(VnCity: List<VnCity>): LiveData<out List<VnCity>> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext VnCityDAO.getVnCityData()
         }
     }
 
     override suspend fun getVnNationality(VnNationality: List<VnNationality>): LiveData<out List<VnNationality>> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext VnNationalityDAO.getVnNationalityData()
         }
     }
 
     override suspend fun getVnGender(VnGender: VnGender): LiveData<out VnGender> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext VnGenderDAO.getVnGenderData()
         }
     }
 
     override suspend fun getVnAge(VnAge: List<VnAge>): LiveData<out List<VnAge>> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext VnAgeDAO.getVnAgeData()
         }
     }
 
     override suspend fun getLastUpdate(LastUpdate: LastUpdate): LiveData<out LastUpdate> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext LastUpdateDAO.getLastUpdateData()
         }
     }
 
     override suspend fun getCountrySummary(CountrySummary: List<CountrySummary>): LiveData<out List<CountrySummary>> {
         return withContext(Dispatchers.IO) {
-            initData()
             return@withContext CountrySummaryDAO.getCountrySummaryData()
         }
     }
@@ -167,6 +158,7 @@ class CovidRepositoryImpl(
         }
     }
 
+    // fetch data from api
     private suspend fun fetchVnSummary() {
         val diff = 0
         val recover = 0

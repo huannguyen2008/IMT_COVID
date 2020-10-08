@@ -1,9 +1,11 @@
 package android.study.imt_covid.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.study.imt_covid.R
 import android.study.imt_covid.data.dataClass.entity.CountrySummary
 import android.study.imt_covid.data.dataClass.entity.VnCity
+import android.study.imt_covid.internal.formatNumber
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.ui.item.VnCityItem
 import android.study.imt_covid.ui.item.WorldCountryItem
@@ -27,7 +29,6 @@ import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
-import java.text.DecimalFormat
 
 
 class HomeFragment : ScopedFragment(), KodeinAware {
@@ -41,13 +42,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val viewModelFactory: HomeViewModelFactory by instance()
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(HomeViewModel::class.java)
-
         // move to chart fragment
         see_more.setOnClickListener(
             Navigation.createNavigateOnClickListener(
@@ -58,7 +57,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         bindLastUpdate()
         setupSpinner()
     }
-
+    // the dropdown list to chose whether VN or World information
     private fun setupSpinner(){
         // spinner title
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -84,23 +83,27 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                     city_or_country.text = getString(R.string.city_provinces)
                     note_vietnam.text = getString(R.string.note_vn)
                     cases_table_title.text = getString(R.string.cases_city_title)
-                } else {
+                }
+                if (summary_title_spinner.selectedItemPosition == 1){
                     bindUIWorld()
                     city_or_country.text = getString(R.string.country_region)
                     note_vietnam.text = null
                     cases_table_title.text = getString(R.string.cases_country_title)
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
         }
     }
+    // bind UI of Vietnam to view
     private fun bindUIVn() = launch {
+        val unbind = unbindValue
+        if (unbind != null) {
+            unbind()
+        }
         val vnSum = viewModel.vnSummary.await()
-        vnSum.observe(viewLifecycleOwner, Observer {
+        vnSum.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
             total_cases_number.text = it.total.toString()
             active_cases_number.text = it.active.toString()
@@ -109,16 +112,24 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
         })
         val vnCity = viewModel.vnCity.await()
-        vnCity.observe(viewLifecycleOwner, Observer {
+        vnCity.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
             initRecycleViewCityVn(it.toVnCityItem())
         })
-
+        unbindValue = {
+            vnSum.removeObservers(this@HomeFragment)
+            vnCity.removeObservers(this@HomeFragment)
+        }
+        viewModel.CovidRepository.initData()
     }
 
     private fun bindUIWorld() = launch {
+        val unbind = unbindValue
+        if (unbind != null) {
+            unbind()
+        }
         val vnWorld = viewModel.worldSummary.await()
-        vnWorld.observe(viewLifecycleOwner, Observer {
+        vnWorld.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
             updateTotal(it.total, it.newCases)
             updateActive(it.active)
@@ -126,15 +137,21 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             updateDeath(it.totalDeath, it.newDeath)
         })
         val countrySum = viewModel.countrySummary.await()
-        countrySum.observe(viewLifecycleOwner, Observer {
+        countrySum.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
             initRecycleViewCountry(it.toCountryItem())
         })
+        unbindValue = {
+            vnWorld.removeObservers(this@HomeFragment)
+            countrySum.removeObservers(this@HomeFragment)
+        }
+        viewModel.CovidRepository.initData()
     }
 
+    @SuppressLint("FragmentLiveDataObserve")
     private fun bindLastUpdate() = launch {
         val lastUpdate = viewModel.lastUpdate.await()
-        lastUpdate.observe(viewLifecycleOwner, Observer {
+        lastUpdate.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
             val date = LocalDateTime.parse(it.lastUpdate)
                 .format(DateTimeFormatter.ofPattern("EEE, dd MMM, yyyy, HH:mm:ss"))
@@ -143,22 +160,22 @@ class HomeFragment : ScopedFragment(), KodeinAware {
     }
 
     private fun updateTotal(total: Int, newCases: Int) {
-        total_cases_number.text = ("${formatValue(total.toFloat())} + ${formatValue(newCases.toFloat())}↑")
+        total_cases_number.text = ("${formatNumber(total.toFloat())} + ${formatNumber(newCases.toFloat())}↑")
     }
 
     private fun updateActive(active: Int) {
-        active_cases_number.text = formatValue(active.toFloat()).toString()
+        active_cases_number.text = formatNumber(active.toFloat()).toString()
     }
 
     private fun updateRecovered(recovered: Int) {
-        recovered_cases_number.text = formatValue(recovered.toFloat()).toString()
+        recovered_cases_number.text = formatNumber(recovered.toFloat()).toString()
     }
 
     private fun updateDeath(death: Int, newDeath: Int) {
-        death_cases_number.text = ("${formatValue(death.toFloat())} + ${formatValue(newDeath.toFloat())}↑")
+        death_cases_number.text = ("${formatNumber(death.toFloat())} + ${formatNumber(newDeath.toFloat())}↑")
     }
 
-    // parse vn city to recycle view
+    // pass vn city to recycle view
     private fun List<VnCity>.toVnCityItem(): List<VnCityItem> {
         return this.map {
             VnCityItem(it)
@@ -174,7 +191,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             adapter = groupAdapter
         }
     }
-    // parse world country to recycle view
+    // pass world country to recycle view
     private fun List<CountrySummary>.toCountryItem(): List<WorldCountryItem> {
         return this.map {
             WorldCountryItem(it)
@@ -190,15 +207,6 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             adapter = groupAdapter
         }
     }
-    private fun formatValue(value: Float): String? {
-        var value = value
-        val arr = arrayOf("", "K", "M", "B", "T", "P", "E")
-        var index = 0
-        while (value / 1000 >= 1) {
-            value /= 1000
-            index++
-        }
-        val decimalFormat = DecimalFormat("#.##")
-        return java.lang.String.format("%s %s", decimalFormat.format(value), arr[index])
-    }
+    // unbind the data was bind before
+    private var unbindValue: (() -> Unit)? = null
 }

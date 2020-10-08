@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
@@ -37,42 +38,42 @@ class ChartFragment(
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ChartViewModel::class.java)
         bindUI()
-
-
     }
 
     private fun bindUI() = launch {
         val vnNation = viewModel.vnNation.await()
-        vnNation.observe(viewLifecycleOwner, Observer {
+        vnNation.observe(viewLifecycleOwner, Observer { it ->
             if (it == null) return@Observer
-
-
+//            test_text.text = it.toString()
 //          draw pie chart for nationality
+            val numberCaseSorted = it.sortedByDescending { it.numberCases }.toMutableList()
             val nationality = ArrayList<PieEntry>()
-            for ((nation, number) in it) {
+            for ((nation, number) in numberCaseSorted.take(3)) {
                 nationality.add(PieEntry(number.toFloat(), nation))
             }
-            val dataSet = PieDataSet(nationality, "Cases by Nationality")
-            dataSet.setDrawIcons(false)
-            dataSet.sliceSpace = 3f
-            dataSet.iconsOffset = MPPointF(0F, 60F)
-            dataSet.selectionShift = 5f
-            dataSet.setColors(R.color.colorPrimary)
-//            val total = it.male + it.female
+            val other = numberCaseSorted.subList(2,numberCaseSorted.lastIndex)
+            nationality.add(PieEntry(other.map { it.numberCases }.sum().toFloat(),"Other"))
+            val dataSet = PieDataSet(nationality, "")
             val data = PieData(dataSet)
             data.setValueTextSize(11f)
             data.setValueTextColor(Color.WHITE)
+            dataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
+            nation_pie_chart.description.isEnabled = false
+            nation_pie_chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            nation_pie_chart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            nation_pie_chart.legend.orientation = Legend.LegendOrientation.VERTICAL
+            dataSet.sliceSpace = 3f
+            dataSet.iconsOffset = MPPointF(0F, 60F)
+            dataSet.selectionShift = 5f
             nation_pie_chart.data = data
             nation_pie_chart.setUsePercentValues(true)
             nation_pie_chart.setDrawEntryLabels(false)
             nation_pie_chart.highlightValues(null)
             nation_pie_chart.invalidate()
-            nation_pie_chart.description.isEnabled = false
-            nation_pie_chart.legend.isEnabled = false
-            nation_pie_chart.setCenterTextSize(11f);
-            nation_pie_chart.setCenterTextColor(Color.BLACK);
+
         })
 
+        // draw gender chart
         val vnGender = viewModel.vnGender.await()
         vnGender.observe(viewLifecycleOwner, Observer {
             if (it == null) return@Observer
@@ -80,13 +81,12 @@ class ChartFragment(
             val gender = ArrayList<PieEntry>()
             gender.add(PieEntry(it.male.toFloat(), "Male(%)"))
             gender.add(PieEntry(it.female.toFloat(), "Female(%)"))
-            val dataSet = PieDataSet(gender, "Cases by Gender")
-            dataSet.setDrawIcons(false)
-            dataSet.sliceSpace = 3f
-            dataSet.iconsOffset = MPPointF(60F, 0F)
-            dataSet.selectionShift = 5f
-            dataSet.setColors(*ColorTemplate.COLORFUL_COLORS)
-//            val total = it.male + it.female
+            val dataSet = PieDataSet(gender, "")
+            gender_pie_chart.description.isEnabled = false
+            gender_pie_chart.legend.horizontalAlignment = Legend.LegendHorizontalAlignment.RIGHT
+            gender_pie_chart.legend.verticalAlignment = Legend.LegendVerticalAlignment.TOP
+            gender_pie_chart.legend.orientation = Legend.LegendOrientation.VERTICAL
+            dataSet.setColors(*ColorTemplate.PASTEL_COLORS)
             val data = PieData(dataSet)
             data.setValueTextSize(11f)
             data.setValueTextColor(Color.WHITE)
@@ -95,10 +95,8 @@ class ChartFragment(
             gender_pie_chart.setDrawEntryLabels(false)
             gender_pie_chart.highlightValues(null)
             gender_pie_chart.invalidate()
-            gender_pie_chart.description.isEnabled = false
-//            pie_chart.centerText = "Total: $total"
-            gender_pie_chart.setCenterTextSize(11f);
-            gender_pie_chart.setCenterTextColor(Color.BLACK);
+
+
         })
 //        val vnAge = viewModel.vnAge.await()
 //        vnAge.observe(viewLifecycleOwner, Observer {

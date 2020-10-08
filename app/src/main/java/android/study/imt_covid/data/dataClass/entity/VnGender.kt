@@ -12,7 +12,6 @@ const val VN_GENDER_ID = 0
 data class VnGender(
     val male: Int,
     val female: Int,
-
     ) {
     @PrimaryKey(autoGenerate = false)
     var id: Int = VN_GENDER_ID

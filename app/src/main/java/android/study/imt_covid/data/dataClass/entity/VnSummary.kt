@@ -8,7 +8,6 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 
 const val VN_SUM_ID = 0
-
 @Entity(tableName = "vn_summary")
 data class VnSummary(
     override val diff: Int,
@@ -25,10 +24,6 @@ data class VnSummary(
 
 // convert json file <list<any>>
 class VnSummaryTypeConverter : TypeAdapter<VnSummary>() {
-    override fun write(out: JsonWriter?, value: VnSummary?) {
-
-    }
-
     override fun read(reader: JsonReader?): VnSummary? {
         reader?.beginArray()
         val diff: Int? = reader?.nextInt()
@@ -45,5 +40,8 @@ class VnSummaryTypeConverter : TypeAdapter<VnSummary>() {
             return null
         }
         return VnSummary(diff, recover, totalDeath, active, total, newCases, newDeath)
+    }
+    override fun write(out: JsonWriter?, value: VnSummary?) {
+
     }
 }

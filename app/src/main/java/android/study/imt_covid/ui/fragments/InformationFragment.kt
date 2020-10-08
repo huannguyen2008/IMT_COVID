@@ -35,9 +35,10 @@ class InformationFragment : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(InformationViewModel::class.java)
         getLink(gov_link)
-        getLink(worldometer_link)
+        getLink(who_link)
         getLink(ecdc_link)
         getLink(jhu_link)
+        getLink(fb_link)
     }
 
     private fun getLink(view: TextView?) {

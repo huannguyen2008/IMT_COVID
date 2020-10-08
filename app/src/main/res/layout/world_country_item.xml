@@ -22,7 +22,8 @@
         android:layout_weight="0.2"
         android:text="@string/Default_number"
         android:textAlignment="center"
-        android:textColor="@color/red" />
+        android:textColor="@color/red"
+        android:textSize="@dimen/country_text" />
 
     <TextView
         android:id="@+id/recovered_of_country"
@@ -31,7 +32,8 @@
         android:layout_weight="0.2"
         android:text="@string/Default_number"
         android:textAlignment="center"
-        android:textColor="@color/green" />
+        android:textColor="@color/green"
+        android:textSize="@dimen/country_text" />
 
     <TextView
         android:id="@+id/active_of_country"
@@ -40,7 +42,9 @@
         android:layout_weight="0.2"
         android:text="@string/Default_number"
         android:textAlignment="center"
-        android:textColor="@color/yellow" />
+        android:textColor="@color/yellow"
+        android:textSize="@dimen/country_text" />
+
     <TextView
         android:id="@+id/death_of_country"
         android:layout_width="0dp"
@@ -48,5 +52,6 @@
         android:layout_weight="0.2"
         android:text="@string/Default_number"
         android:textAlignment="center"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/country_text" />
 </LinearLayout>

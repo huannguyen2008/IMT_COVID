@@ -8,8 +8,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [VnSummary::class, VnCity::class, VnNationality::class,
-        VnGender::class, VnAge::class, WorldSummary::class, LastUpdate::class, CountrySummary::class],
+    entities = [VnSummary::class, VnCity::class,
+        VnNationality::class, VnGender::class,
+        VnAge::class, WorldSummary::class,
+        LastUpdate::class, CountrySummary::class],
     version = 1
 )
 abstract class CovidDtb : RoomDatabase() {

@@ -10,7 +10,6 @@ import java.text.DecimalFormat
 class HomeViewModel(
     val CovidRepository: CovidRepository
 ) : ViewModel() {
-
     val vnSummary by lazyDeferred {
         val diff = 0
         val recover = 0

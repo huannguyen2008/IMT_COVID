@@ -3,28 +3,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<FrameLayout xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.fragments.ChartFragment">
-
-    <LinearLayout
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/gender_pie_chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/nation_pie_chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/age_bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"/>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        tools:context=".ui.fragments.ChartFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_left"
+                android:text="@string/number_of_cases_by_gender"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/gender_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_left"
+                android:text="@string/number_of_cases_by_nationality"
+                android:textSize="@dimen/normal_text"
+                android:textStyle="bold" />
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/nation_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/age_bar_chart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:id="@+id/test_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </FrameLayout>
 </ScrollView>

@@ -2,7 +2,7 @@ package android.study.imt_covid
 
 import android.app.Application
 import android.study.imt_covid.data.dtbAndDAO.CovidDtb
-import android.study.imt_covid.network.APIdata
+import android.study.imt_covid.network.ApiService
 import android.study.imt_covid.network.networkSource.DataSource
 import android.study.imt_covid.network.networkSource.DataSourceImpl
 import android.study.imt_covid.network.interceptor.ConnectivityInterceptor
@@ -37,7 +37,7 @@ class AppApplication : Application(), KodeinAware {
         bind() from singleton { instance<CovidDtb>().CountrySummaryDAO() }
 
         bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-        bind() from singleton { APIdata(instance()) }
+        bind() from singleton { ApiService(instance()) }
         bind<DataSource>() with singleton { DataSourceImpl(instance()) }
         bind<CovidRepository>() with singleton {
             CovidRepositoryImpl(
