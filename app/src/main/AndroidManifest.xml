@@ -7,9 +7,9 @@
 
     <application
         android:name=".AppApplication"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/imt_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/imt_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
         <activity android:name=".ui.activities.MainActivity">
