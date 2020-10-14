@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.github.mikephil.charting.utils.MPPointF
+import com.google.android.play.core.assetpacks.j
 import kotlinx.android.synthetic.main.chart_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
@@ -38,6 +40,35 @@ class ChartFragment(
         viewModel = ViewModelProvider(this, viewModelFactory)
             .get(ChartViewModel::class.java)
         bindUI()
+        //age line chart
+//        val entries = ArrayList<Entry>()
+//
+//        entries.add(Entry(1f, 10f))
+//        entries.add(Entry(2f, 2f))
+//        entries.add(Entry(3f, 7f))
+//        entries.add(Entry(4f, 20f))
+//        entries.add(Entry(5f, 16f))
+//
+//        val vl = LineDataSet(entries, "My Type")
+//
+//        vl.setDrawValues(false)
+//        vl.setDrawFilled(true)
+//        vl.lineWidth = 3f
+//        vl.fillColor = R.color.colorPrimary
+//        vl.fillAlpha = R.color.red
+//
+//        age_line_chart.xAxis.labelRotationAngle = 0f
+//
+//        age_line_chart.data = LineData(vl)
+//        age_line_chart.axisRight.isEnabled = false
+//        age_line_chart.xAxis.axisMaximum = 0.1f
+//        age_line_chart.setTouchEnabled(true)
+//        age_line_chart.setPinchZoom(true)
+//
+//        age_line_chart.description.text = "Days"
+//        age_line_chart.setNoDataText("No forex yet!")
+//
+//        age_line_chart.animateX(1800, Easing.EaseInExpo)
     }
 
     private fun bindUI() = launch {
@@ -102,29 +133,7 @@ class ChartFragment(
 //        vnAge.observe(viewLifecycleOwner, Observer {
 //            if (it == null) return@Observer
 //            // draw age bar chart
-//            val age = ArrayList<BarEntry>()
-//            age.add(BarEntry(945f, 0f))
-//            age.add(BarEntry(1040f, 1f))
-//            age.add(BarEntry(1100f, 2f))
-//            age.add(BarEntry(1369f, 3f))
-//            age.add(BarEntry(1487f, 4f))
-//            age.add(BarEntry(1487f, 5f))
-//            age.add(BarEntry(1487f, 6f))
-
-//            val labels: BarDataSet = BarDataSet(List<>)
-//            labels.add("1-15").toString()
-//            labels.add("16-30").toString()
-//            labels.add("31-45").toString()
-//            labels.add("46-60").toString()
-//            labels.add("61-75").toString()
-//            labels.add("76-90").toString()
-//            labels.add("91-105").toString()
-//            val data = BarDataSet(age, "Cases by Age")
-//            val dataSet = BarData(labels, data);
-//            bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
-//            age_bar_chart.data = data;
-//            age_bar_chart.animateY(5000);
-
 //        })
+
     }
 }

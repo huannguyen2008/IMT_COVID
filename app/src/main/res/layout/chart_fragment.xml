@@ -40,7 +40,7 @@
                 android:layout_height="200dp" />
 
             <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/age_bar_chart"
+                android:id="@+id/age_line_chart"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
 

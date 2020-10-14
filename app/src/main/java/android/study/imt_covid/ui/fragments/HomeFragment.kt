@@ -35,6 +35,8 @@ class HomeFragment : ScopedFragment(), KodeinAware {
 
     override val kodein by closestKodein()
     private lateinit var viewModel: HomeViewModel
+    // unbind the data was bind before
+    private var unbindValue: (() -> Unit)? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -92,7 +94,7 @@ class HomeFragment : ScopedFragment(), KodeinAware {
                 }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
         }
     }
@@ -105,11 +107,10 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val vnSum = viewModel.vnSummary.await()
         vnSum.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
-            total_cases_number.text = it.total.toString()
+            updateTotalVN(it.total,it.newCases)
             active_cases_number.text = it.active.toString()
             recovered_cases_number.text = it.recover.toString()
-            death_cases_number.text = it.totalDeath.toString()
-
+            updateDeathVN(it.totalDeath,it.newDeath)
         })
         val vnCity = viewModel.vnCity.await()
         vnCity.observe(this@HomeFragment, Observer {
@@ -131,10 +132,10 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         val vnWorld = viewModel.worldSummary.await()
         vnWorld.observe(this@HomeFragment, Observer {
             if (it == null) return@Observer
-            updateTotal(it.total, it.newCases)
+            updateTotalWorld(it.total, it.newCases)
             updateActive(it.active)
             updateRecovered(it.recover)
-            updateDeath(it.totalDeath, it.newDeath)
+            updateDeathWorld(it.totalDeath, it.newDeath)
         })
         val countrySum = viewModel.countrySummary.await()
         countrySum.observe(this@HomeFragment, Observer {
@@ -159,7 +160,11 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         })
     }
 
-    private fun updateTotal(total: Int, newCases: Int) {
+    private fun updateTotalVN(total: Int, newCases: Int) {
+        total_cases_number.text = ("$total + $newCases↑")
+    }
+
+    private fun updateTotalWorld(total: Int, newCases: Int) {
         total_cases_number.text = ("${formatNumber(total.toFloat())} + ${formatNumber(newCases.toFloat())}↑")
     }
 
@@ -171,7 +176,10 @@ class HomeFragment : ScopedFragment(), KodeinAware {
         recovered_cases_number.text = formatNumber(recovered.toFloat()).toString()
     }
 
-    private fun updateDeath(death: Int, newDeath: Int) {
+    private fun updateDeathVN(death: Int, newDeath: Int) {
+        death_cases_number.text = ("$death + $newDeath↑")
+    }
+    private fun updateDeathWorld(death: Int, newDeath: Int) {
         death_cases_number.text = ("${formatNumber(death.toFloat())} + ${formatNumber(newDeath.toFloat())}↑")
     }
 
@@ -207,6 +215,5 @@ class HomeFragment : ScopedFragment(), KodeinAware {
             adapter = groupAdapter
         }
     }
-    // unbind the data was bind before
-    private var unbindValue: (() -> Unit)? = null
+
 }

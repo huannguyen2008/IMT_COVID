@@ -7,7 +7,6 @@ import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
 
 const val VN_GENDER_ID = 0
-
 @Entity(tableName = "gender")
 data class VnGender(
     val male: Int,

@@ -50,9 +50,8 @@ class CovidRepositoryImpl(
     }
 
     override suspend fun initData() {
-        if (isFetchNeeded(ZonedDateTime.now().minusHours(1)))
-            fetchVnSummary()
             fetchWorldSummary()
+            fetchVnSummary()
             fetchVnCity()
             fetchVnNationality()
             fetchVnGender()
@@ -245,9 +244,8 @@ class CovidRepositoryImpl(
         DataSource.fetchLastUpdate(LastUpdate(lastUpdate))
     }
 
-    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
-        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(1000)
-        return lastFetchTime.isBefore(thirtyMinAgo)
-    }
-
+//    private fun isFetchNeeded(lastFetchTime: ZonedDateTime): Boolean {
+//        val thirtyMinAgo = ZonedDateTime.now().minusMinutes(1000)
+//        return lastFetchTime.isBefore(thirtyMinAgo)
+//    }
 }

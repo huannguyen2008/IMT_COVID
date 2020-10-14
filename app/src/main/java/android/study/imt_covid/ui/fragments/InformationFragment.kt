@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.study.imt_covid.R
+import android.study.imt_covid.internal.getLink
 import android.study.imt_covid.ui.base.ScopedFragment
 import android.study.imt_covid.ui.viewmodel.InformationViewModel
 import android.study.imt_covid.ui.viewmodel.factory.InformationViewModelFactory
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.fragment_information.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -41,9 +43,5 @@ class InformationFragment : ScopedFragment(), KodeinAware {
         getLink(fb_link)
     }
 
-    private fun getLink(view: TextView?) {
-        if (view != null) {
-            view.movementMethod = LinkMovementMethod.getInstance()
-        }
-    }
+
 }

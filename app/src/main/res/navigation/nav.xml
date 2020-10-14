@@ -22,10 +22,19 @@
         android:id="@+id/menuFragment"
         android:name="android.study.imt_covid.ui.fragments.MenuFragment"
         android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" />
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chartFragment"
         android:name="android.study.imt_covid.ui.fragments.ChartFragment"
         android:label="chart_fragment"
         tools:layout="@layout/chart_fragment" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="android.study.imt_covid.ui.fragments.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>
