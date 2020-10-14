@@ -6,6 +6,7 @@
     <string name="about">Về chúng tôi</string>
     <string name="lang">Thay đổi ngôn ngữ</string>
     <string name="information">Thông tin</string>
+
     <string name="covid_19_dashboard">Thông tin về COVID-19</string>
     <string-array name="summary_title">
         <item name="vietnam_summary">Thông tin Việt Nam</item>
@@ -15,8 +16,8 @@
         <item name="en">Tiếng Anh</item>
         <item name="vn">Tiếng Việt</item>
     </string-array>
-    <string name="choose_lang">Chọn ngôn ngữ</string>
 
+    <string name="choose_lang">Chọn ngôn ngữ</string>
     <string name="last_update">Cập nhật lúc %1$s</string>
     <string name="cases_city_title">Ca nhiễm theo tỉnh/thành phố</string>
     <string name="country_region">Q.gia/Vùng LT</string>
@@ -33,34 +34,33 @@
     <string name="who_link"><a href="https://covid19.who.int/">WHO Coronavirus Disease(COVID-19) Dashboard</a></string>
     <string name="jhu_link"><a href="https://coronavirus.jhu.edu/map.html">COVID-19 Dashboard by the Center for Systems Science and Engineering (CSSE) at Johns Hopkins University (JHU)</a></string>
     <string name="ecdc_link"><a href="https://www.ecdc.europa.eu/en/geographical-distribution-2019-ncov-cases">European Centre for Disease Prevention and Control</a></string>
-    <string name="fb_link"><a href="https://www.facebook.com/thongtinchinhphu">Information from Vietnam Government</a> </string>
+    <string name="fb_link"><a href="https://www.facebook.com/thongtinchinhphu">Thông tin chính phủ</a> </string>
     <string name="symptoms">Triệu chứng</string>
     <string name="assistance">Hỗ trợ</string>
     <string name="cases_country_title">Ca nhiễm theo Quốc gia/ Vùng lãnh thổ</string>
     <string name="see_more"><u>Xem thêm</u></string>
     <string name="number_of_cases_by_gender">CA NHIỄM THEO GIỚI TÍNH</string>
     <string name="number_of_cases_by_nationality">CA NHIỄM THEO QUỐC TỊCH</string>
-    <string name="symptoms_des">It usually takes 2–14 days to the symptoms appear on the infected patient. In some specific cases, symptoms appear after 28 days since the patient is infected. According to WHO, the common COVID-19 symptoms are:</string>
+    <string name="symptoms_des">Các triệu chứng thường xuất hiện trên bệnh nhân bị nhiễm bệnh sau 2–14 ngày. Trong một số trường hợp cụ thể, các triệu chứng xuất hiện sau 28 ngày kể từ khi bệnh nhân nhiễm bệnh. Theo WHO, các triệu chứng COVID-19 phổ biến là:</string>
     <string name="list">
     <ul>
-        <li>Fever or chills</li>\n
-        <li>Cough</li>\n
-        <li>Fatigue</li>\n
-        <li>Shortness of breath or difficulty breathing</li>\n
-        <li>Muscle or body aches</li>\n
-        <li>New loss of taste or smell</li>\n
-        <li>Sore throat</li>\n
-        <li>Congestion or runny nose</li>\n
-        <li>Nausea or vomiting</li>\n
-        <li>Headache</li>\n
-        <li>Diarrhea</li>
+        <li>Sốt hoặc ớn lạnh</li>\n
+        <li>Ho</li>\n
+        <li>Mệt mỏi</li>\n
+        <li>Thở gấp hoặc khó thở</li>\n
+        <li>Đau nhức cơ thể</li>\n
+        <li>Mất vị giác hoặc thính giác</li>\n
+        <li>Đau họng</li>\n
+        <li>Nghẹt mũi, sổ mũi</li>\n
+        <li>Buồn nôn, nôn</li>\n
+        <li>Đau đầu</li>\n
+        <li>Tiêu chảy</li>
     </ul>
     </string>
-    <string name="hotline">Vietnam\'s hotline: 19009095</string>
-    <string name="hospital"> <a href="http://vncdc.gov.vn/vi/phong-chong-dich-benh-viem-phoi-cap-ncov/14013/danh-sach-cac-don-vi-da-duoc-bo-y-te-cho-phep-thuc-hien-xet-nghiem-khang-dinh-covid-19-cap-nhat-den-ngay-10-8-2020">List of hospital in Vietnam where can test for COVID-19
+    <string name="hotline">Đường dây nóng Việt Nam: 19009095</string>
+    <string name="hospital"> <a href="http://vncdc.gov.vn/vi/phong-chong-dich-benh-viem-phoi-cap-ncov/14013/danh-sach-cac-don-vi-da-duoc-bo-y-te-cho-phep-thuc-hien-xet-nghiem-khang-dinh-covid-19-cap-nhat-den-ngay-10-8-2020">Danh sách bệnh viện có thể xét nghiệm COVID-19 tại Việt Nam
 </a> </string>
-    <string name="about_text1">IMT COVID-19 is an Android application that was developed based on the <a href="https://imt-covid19.herokuapp.com/"> IMT COVID-19 website.</a></string>
-    <string name="about_text3">We are Nguyen Tri Huan and Nguyen Duc Dan, under the supervision of Dr. Sebastian Basterrech from FEI, VSB-TUO, Ostrava, Czech Republic.</string>
-    <string name="about_text2">This is the final project to the thesis defence of University of Science and Technology of Hanoi(USTH).</string>
+    <string name="about_text1">IMT COVID-19 là một ứng dụng Android được xây dựng dựa trên <a href="https://imt-covid19.herokuapp.com/"> IMT COVID-19 website.</a></string>
+    <string name="about_text2">Đây là dự án để bảo vệ luận án tốt nghiệp tại trường Đại học Khoa học và Công nghệ Hà Nội(USTH).</string>
     <string name="meet_our_team">Meet Our Team</string>
 </resources>

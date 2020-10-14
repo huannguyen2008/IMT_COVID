@@ -6,6 +6,7 @@
     <string name="about">About Us</string>
     <string name="lang">Change language</string>
     <string name="information">Information</string>
+
     <string name="covid_19_dashboard">COVID-19 Dashboard</string>
     <string-array name="summary_title">
         <item name="vietnam_summary">Vietnam Summary</item>
@@ -15,6 +16,7 @@
         <item name="en">English</item>
         <item name="vn">Vietnam</item>
     </string-array>
+
     <string name="choose_lang">Choose Language</string>
     <string name="last_update">Last update at %1$s</string>
     <string name="cases_city_title">Cases by City/Provinces</string>
@@ -59,7 +61,6 @@
     <string name="hospital"> <a href="http://vncdc.gov.vn/vi/phong-chong-dich-benh-viem-phoi-cap-ncov/14013/danh-sach-cac-don-vi-da-duoc-bo-y-te-cho-phep-thuc-hien-xet-nghiem-khang-dinh-covid-19-cap-nhat-den-ngay-10-8-2020">List of hospital in Vietnam where can test for COVID-19
 </a> </string>
     <string name="about_text1">IMT COVID-19 is an Android application that was developed based on the <a href="https://imt-covid19.herokuapp.com/"> IMT COVID-19 website.</a></string>
-    <string name="about_text3">We are Nguyen Tri Huan and Nguyen Duc Dan, under the supervision of Dr. Sebastian Basterrech from FEI, VSB-TUO, Ostrava, Czech Republic.</string>
     <string name="about_text2">This is the final project to the thesis defence of University of Science and Technology of Hanoi(USTH).</string>
     <string name="meet_our_team">Meet Our Team</string>
     <!--    <string name="imt_covid_19_website"></string>-->
