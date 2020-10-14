@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     android:orientation="vertical"
     tools:context=".ui.fragments.MenuFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/about_us"
-        android:layout_marginBottom="1dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
         android:backgroundTint="@color/white">
 
         <TextView
-            android:layout_marginStart="@dimen/padding_left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_left"
             android:padding="@dimen/padding_left"
             android:text="@string/about"
             android:textColor="@color/black"
@@ -28,18 +28,18 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/change_lang"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/white"
         android:layout_height="wrap_content"
-        >
+        android:backgroundTint="@color/white">
+
         <TextView
-            android:layout_marginStart="@dimen/padding_left"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding_left"
             android:padding="@dimen/padding_left"
             android:text="@string/lang"
             android:textColor="@color/black"
             android:textSize="17sp"
-            android:textStyle="normal"/>
+            android:textStyle="normal" />
 
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
