@@ -23,7 +23,7 @@ class AboutUsFragment : Fragment() {
     }
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        getLink(about_us_text)
+        getLink(about_us_text1)
     }
 
 }

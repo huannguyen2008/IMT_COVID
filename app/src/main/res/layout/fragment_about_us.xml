@@ -1,22 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.AboutUsFragment">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_left"
-        android:text="@string/about"
-        android:textSize="@dimen/caption"
-        android:textStyle="bold" />
-    <TextView
-        android:id="@+id/about_us_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/caption"
-        android:padding="5dp"
-        android:text="@string/about_text" />
-</LinearLayout>
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.AboutUsFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:text="@string/about"
+            android:textSize="@dimen/caption"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/about_us_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/about_text1"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/about_us_text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/caption"
+            android:padding="5dp"
+            android:text="@string/about_text2"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_left"
+            android:text="@string/meet_our_team"
+            android:textAlignment="center"
+            android:textSize="@dimen/caption"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_margin="@dimen/padding_left"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@drawable/seba_profile" />
+
+        <ImageView
+            android:layout_margin="@dimen/padding_left"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@drawable/huan_profile" />
+
+        <ImageView
+            android:layout_margin="@dimen/padding_left"
+            android:layout_width="match_parent"
+            android:layout_height="330dp"
+            android:background="@drawable/dan_profile" />
+    </LinearLayout>
+</ScrollView>
